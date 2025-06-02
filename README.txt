@@ -4,7 +4,7 @@ This is a personal portfolio site.
 Credits:
 
 	Template:
-		Hyperspace by HTML5 UP (https://html5up.net)
+		Hyperspace by HTML5 UP (html5up.net)
 
 	Demo Images:
 		Unsplash (unsplash.com)
