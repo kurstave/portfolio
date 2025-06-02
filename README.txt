@@ -5,6 +5,7 @@ Credits:
 
 	Template:
 		Hyperspace by HTML5 UP (html5up.net)
+		AJ (aj@lkn.io | @ajlkn)
 
 	Demo Images:
 		Unsplash (unsplash.com)
