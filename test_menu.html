@@ -27,13 +27,15 @@
       background-position: center;
       opacity: 0;
       transition: opacity 3s ease-in-out;
+      z-index: -1;
+    }
+
+    #main-menu {
+      transition: opacity 1s ease-in-out;
     }
 
     .menu-buttons {
-      position: absolute;
-      top: 60%;
-      left: 50%;
-      transform: translateX(-50%);
+      margin-top: 20px;
       opacity: 0;
       transition: opacity 1s ease-in-out 1s;
     }
@@ -61,10 +63,7 @@
     }
 
     .title {
-      position: absolute;
-      top: 30%;
-      left: 50%;
-      transform: translateX(-50%);
+      margin-top: 15%;
       font-size: 3em;
       text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.8);
       opacity: 0;
@@ -110,28 +109,42 @@
     /* Content sections */
     #content-sections {
       position: absolute;
-      top: 70%;
+      top: 50%;
       left: 50%;
-      transform: translateX(-50%);
+      transform: translate(-50%, -50%);
       width: 80%;
       max-width: 800px;
       color: white;
       text-align: center;
-      margin-top: 20px;
-      z-index: 1;
+      display: none;
     }
 
     .content-section {
-      display: none;
-      background-color: rgba(0, 0, 0, 0.6);
-      padding: 20px;
+      background-color: rgba(0, 0, 0, 0.75);
+      padding: 30px;
       border-radius: 10px;
-      animation: fadeIn 0.5s ease-in-out;
+      opacity: 0;
+      transition: opacity 1s ease-in-out;
     }
 
-    @keyframes fadeIn {
-      from { opacity: 0; transform: translateY(10px); }
-      to { opacity: 1; transform: translateY(0); }
+    .content-section.active {
+      display: block;
+      opacity: 1;
+    }
+
+    .back-button {
+      margin-top: 30px;
+      font-size: 1.2em;
+      padding: 10px 20px;
+      background-color: #444;
+      border: 2px solid white;
+      color: white;
+      border-radius: 8px;
+      cursor: pointer;
+    }
+
+    .back-button:hover {
+      background-color: #666;
     }
 
     a {
@@ -149,31 +162,37 @@
   <!-- Background -->
   <div class="background"></div>
 
-  <!-- Title Text -->
-  <div class="title">
-    <h1>Kurstave's Portfolio</h1>
+  <!-- Main Menu Container -->
+  <div id="main-menu">
+    <div class="title">
+      <h1>Kurstave's Portfolio</h1>
+    </div>
+
+    <div class="menu-buttons">
+      <button onclick="showSection('projects')">Current Projects</button>
+      <button onclick="showSection('about')">About Me</button>
+      <button onclick="showSection('resume')">Resume</button>
+    </div>
   </div>
 
-  <!-- Menu Buttons -->
-  <div class="menu-buttons">
-    <button onclick="showSection('projects')">Current Projects</button>
-    <button onclick="showSection('about')">About Me</button>
-    <button onclick="showSection('resume')">Resume</button>
-  </div>
-
-  <!-- Dynamic Content Sections -->
+  <!-- Content Sections -->
   <div id="content-sections">
     <div id="projects" class="content-section">
       <h2>Current Projects</h2>
-      <p>Details about your latest projects go here. You can add images, links, or project cards as needed.</p>
+      <p>Details about your latest projects go here.</p>
+      <button class="back-button" onclick="returnToMenu()">Back to Menu</button>
     </div>
+
     <div id="about" class="content-section">
       <h2>About Me</h2>
-      <p>This section can include your biography, background, skills, and what drives you.</p>
+      <p>Some information about who you are.</p>
+      <button class="back-button" onclick="returnToMenu()">Back to Menu</button>
     </div>
+
     <div id="resume" class="content-section">
       <h2>Resume</h2>
-      <p>You could either embed your resume as text or link to a downloadable PDF.</p>
+      <p>Your resume content or a link to download it.</p>
+      <button class="back-button" onclick="returnToMenu()">Back to Menu</button>
     </div>
   </div>
 
@@ -182,36 +201,58 @@
   </footer>
 
   <script>
+    // Enter button behavior
     document.getElementById('enter-button').addEventListener('click', () => {
-      // Hide the start screen
       document.getElementById('start-screen').style.display = 'none';
 
-      // Play background music
       const audio = new Audio('https://raw.githubusercontent.com/kurstave/portfolio/main/assets/music/aspertia-city.mp3');
       audio.volume = 0.2;
       audio.loop = true;
-      audio.play().catch((e) => {
-        console.warn("Audio playback failed:", e);
-      });
+      audio.play().catch(e => console.warn("Audio playback failed:", e));
 
-      // Fade in the background
       document.querySelector('.background').style.opacity = 1;
 
-      // Fade in title
       setTimeout(() => {
         document.querySelector('.title').style.opacity = 1;
       }, 2000);
 
-      // Fade in buttons
       setTimeout(() => {
         document.querySelector('.menu-buttons').style.opacity = 1;
       }, 4000);
     });
 
+    // Show a section, fade out menu
     function showSection(id) {
-      const sections = document.querySelectorAll('.content-section');
-      sections.forEach(section => section.style.display = 'none');
-      document.getElementById(id).style.display = 'block';
+      document.getElementById('main-menu').style.opacity = 0;
+      setTimeout(() => {
+        document.getElementById('main-menu').style.display = 'none';
+        document.getElementById('content-sections').style.display = 'block';
+
+        // Hide all sections first
+        document.querySelectorAll('.content-section').forEach(sec => {
+          sec.classList.remove('active');
+        });
+
+        // Show selected
+        const section = document.getElementById(id);
+        section.classList.add('active');
+      }, 1000);
+    }
+
+    // Return to menu
+    function returnToMenu() {
+      // Fade out all content sections
+      document.querySelectorAll('.content-section').forEach(sec => {
+        sec.classList.remove('active');
+      });
+
+      setTimeout(() => {
+        document.getElementById('content-sections').style.display = 'none';
+        document.getElementById('main-menu').style.display = 'block';
+        setTimeout(() => {
+          document.getElementById('main-menu').style.opacity = 1;
+        }, 100); // slight delay to trigger transition
+      }, 500);
     }
   </script>
 
