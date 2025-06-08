@@ -92,7 +92,7 @@
       z-index: 1000;
     }
 
-    #start-button {
+    #enter-button {
       font-size: 2em;
       padding: 20px 40px;
       background-color: #222;
@@ -103,8 +103,39 @@
       transition: background-color 0.3s;
     }
 
-    #start-button:hover {
+    #enter-button:hover {
       background-color: #444;
+    }
+
+    /* Content sections */
+    #content-sections {
+      position: absolute;
+      top: 70%;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 80%;
+      max-width: 800px;
+      color: white;
+      text-align: center;
+      margin-top: 20px;
+      z-index: 1;
+    }
+
+    .content-section {
+      display: none;
+      background-color: rgba(0, 0, 0, 0.6);
+      padding: 20px;
+      border-radius: 10px;
+      animation: fadeIn 0.5s ease-in-out;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(10px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    a {
+      color: #00FFFF;
     }
   </style>
 </head>
@@ -125,13 +156,29 @@
 
   <!-- Menu Buttons -->
   <div class="menu-buttons">
-    <a href="index.html"><button>Current Projects</button></a>
-    <a href="generic.html"><button>About Me</button></a>
-    <a href="elements.html"><button>Resume</button></a>
+    <button onclick="showSection('projects')">Current Projects</button>
+    <button onclick="showSection('about')">About Me</button>
+    <button onclick="showSection('resume')">Resume</button>
+  </div>
+
+  <!-- Dynamic Content Sections -->
+  <div id="content-sections">
+    <div id="projects" class="content-section">
+      <h2>Current Projects</h2>
+      <p>Details about your latest projects go here. You can add images, links, or project cards as needed.</p>
+    </div>
+    <div id="about" class="content-section">
+      <h2>About Me</h2>
+      <p>This section can include your biography, background, skills, and what drives you.</p>
+    </div>
+    <div id="resume" class="content-section">
+      <h2>Resume</h2>
+      <p>You could either embed your resume as text or link to a downloadable PDF.</p>
+    </div>
   </div>
 
   <footer>
-    <p>&copy; 2025 Kurstave's Portfolio | <a href="#" style="color: #00FFFF;">My Socials</a></p>
+    <p>&copy; 2025 Kurstave's Portfolio | <a href="#">My Socials</a></p>
   </footer>
 
   <script>
@@ -139,9 +186,9 @@
       // Hide the start screen
       document.getElementById('start-screen').style.display = 'none';
 
-      // Play background music (ensure it's a direct link)
+      // Play background music
       const audio = new Audio('https://raw.githubusercontent.com/kurstave/portfolio/main/assets/music/aspertia-city.mp3');
-      audio.volume = 0.2
+      audio.volume = 0.2;
       audio.loop = true;
       audio.play().catch((e) => {
         console.warn("Audio playback failed:", e);
@@ -150,16 +197,22 @@
       // Fade in the background
       document.querySelector('.background').style.opacity = 1;
 
-      // Fade in title after delay
+      // Fade in title
       setTimeout(() => {
         document.querySelector('.title').style.opacity = 1;
       }, 2000);
 
-      // Fade in buttons after longer delay
+      // Fade in buttons
       setTimeout(() => {
         document.querySelector('.menu-buttons').style.opacity = 1;
       }, 4000);
     });
+
+    function showSection(id) {
+      const sections = document.querySelectorAll('.content-section');
+      sections.forEach(section => section.style.display = 'none');
+      document.getElementById(id).style.display = 'block';
+    }
   </script>
 
 </body>
