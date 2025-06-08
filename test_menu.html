@@ -4,6 +4,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Kurstave's Portfolio - Main Menu</title>
+  <link rel="stylesheet" href="assets/css/main.css" />
   <style>
     body {
       margin: 0;
@@ -78,7 +79,6 @@
       color: rgba(255, 255, 255, 0.7);
     }
 
-    /* Start screen */
     #start-screen {
       position: fixed;
       top: 0;
@@ -107,32 +107,42 @@
       background-color: #0047AB;
     }
 
-    /* Content sections */
     #content-sections {
       position: absolute;
-      top: 10vh; /* Start near top */
-      left: 50%;
-      transform: translateX(-50%); /* center horizontally only */
-      width: 80%;
-      max-width: 800px;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
       color: white;
       text-align: center;
       display: none;
-      max-height: 80vh;
-      overflow-y: auto; /* scroll if content taller than container */
     }
 
     .content-section {
+      position: absolute;
+      top: 0;
+      left: 100%;
+      width: 100%;
+      height: 100%;
       background-color: rgba(0, 0, 0, 0.75);
       padding: 30px;
       border-radius: 10px;
+      box-sizing: border-box;
       opacity: 0;
-      transition: opacity 1s ease-in-out;
+      transition: opacity 0.6s ease, left 0.6s ease;
+      overflow-y: auto;
+      pointer-events: none;
     }
 
     .content-section.active {
-      display: block;
+      left: 0;
       opacity: 1;
+      pointer-events: auto;
+    }
+
+    .content-section.slide-out-left {
+      left: -100%;
+      opacity: 0;
     }
 
     .back-button {
@@ -165,12 +175,11 @@
   <!-- Background -->
   <div class="background"></div>
 
-  <!-- Main Menu Container -->
+  <!-- Main Menu -->
   <div id="main-menu">
     <div class="title">
       <h1>Kurstave's Portfolio</h1>
     </div>
-
     <div class="menu-buttons">
       <button onclick="showSection('projects')">Current Projects</button>
       <button onclick="showSection('about')">About Me</button>
@@ -203,11 +212,11 @@
       <h2>Contact Me!</h2>
       <p>Here are my socials.</p>
       <ul class="icons">
-				<li><a href="https://github.com/kurstave" class="icon brands fa-github"><span class="label">GitHub</span></a></li>
-				<li><a href="#" class="icon brands fa-instagram"><span class="label">Instagram</span></a></li>
-				<li><a href="#" class="icon brands fa-bandcamp"><span class="label">Bandcamp</span></a></li>
-				<li><a href="#" class="icon brands fa-linkedin-in"><span class="label">LinkedIn</span></a></li>
-			</ul>
+        <li><a href="https://github.com/kurstave" class="icon brands fa-github"><span class="label">GitHub</span></a></li>
+        <li><a href="#" class="icon brands fa-instagram"><span class="label">Instagram</span></a></li>
+        <li><a href="#" class="icon brands fa-bandcamp"><span class="label">Bandcamp</span></a></li>
+        <li><a href="#" class="icon brands fa-linkedin-in"><span class="label">LinkedIn</span></a></li>
+      </ul>
       <button class="back-button" onclick="returnToMenu()">Back to Menu</button>
     </div>
   </div>
@@ -221,18 +230,15 @@
   let fadeTimers = [];
   let background_music;
 
-  // ENTER button behavior
   document.getElementById('enter-button').addEventListener('click', () => {
     document.getElementById('start-screen').style.display = 'none';
     enterClicked = true;
 
-    // Start background music
     background_music = new Audio('https://raw.githubusercontent.com/kurstave/portfolio/main/assets/music/aspertia-city.mp3');
     background_music.volume = 0.2;
     background_music.loop = true;
     background_music.play().catch(e => console.warn("Audio playback failed:", e));
 
-    // Start fade-in
     document.querySelector('.background').style.opacity = 1;
 
     fadeTimers.push(setTimeout(() => {
@@ -243,59 +249,61 @@
       document.querySelector('.menu-buttons').style.opacity = 1;
     }, 4000));
 
-    // Enable click-to-skip
     document.addEventListener('click', skipFadeIn);
   });
 
-  // Skip fade-in animations
   function skipFadeIn() {
     if (!enterClicked) return;
 
-    // Cancel pending animations
     fadeTimers.forEach(timer => clearTimeout(timer));
 
-    // Instantly show everything
     document.querySelector('.background').style.opacity = 1;
     document.querySelector('.title').style.opacity = 1;
     document.querySelector('.menu-buttons').style.opacity = 1;
 
-    // Disable this skip after first use
     document.removeEventListener('click', skipFadeIn);
   }
 
-  // Show a section, fade out menu
   function showSection(id) {
-    document.getElementById('main-menu').style.opacity = 0;
+    const mainMenu = document.getElementById('main-menu');
+    const contentSections = document.getElementById('content-sections');
+    const sectionToShow = document.getElementById(id);
+
+    mainMenu.style.opacity = 0;
+
     setTimeout(() => {
-      document.getElementById('main-menu').style.display = 'none';
-      document.getElementById('content-sections').style.display = 'block';
+      mainMenu.style.display = 'none';
+      contentSections.style.display = 'block';
 
       document.querySelectorAll('.content-section').forEach(sec => {
-        sec.classList.remove('active');
+        sec.classList.remove('active', 'slide-out-left');
       });
 
-      document.getElementById(id).classList.add('active');
-
-      // Reset scroll to top
-      document.getElementById('content-sections').scrollTop = 0;
+      sectionToShow.classList.add('active');
+      sectionToShow.scrollTop = 0;
       window.scrollTo(0, 0);
-
-    }, 1000);
+    }, 600);
   }
 
-  // Return to menu
   function returnToMenu() {
-    document.querySelectorAll('.content-section').forEach(sec => {
-      sec.classList.remove('active');
-    });
+    const mainMenu = document.getElementById('main-menu');
+    const contentSections = document.getElementById('content-sections');
+    const activeSection = document.querySelector('.content-section.active');
 
-    setTimeout(() => {
-      document.getElementById('content-sections').style.display = 'none';
-      document.getElementById('main-menu').style.display = 'block';
+    if (activeSection) {
+      activeSection.classList.add('slide-out-left');
+      activeSection.classList.remove('active');
+
       setTimeout(() => {
-        document.getElementById('main-menu').style.opacity = 1;
-      }, 100);
-    }, 500);
+        activeSection.classList.remove('slide-out-left');
+        contentSections.style.display = 'none';
+        mainMenu.style.display = 'block';
+
+        setTimeout(() => {
+          mainMenu.style.opacity = 1;
+        }, 50);
+      }, 600);
+    }
   }
 </script>
 
