@@ -131,7 +131,7 @@
   </div>
 
   <footer>
-    <p>&copy; 2025 Kurstave's Portfolio | <a href="https://www.example.com" style="color: #00FFFF;">Developer Website</a></p> <!-- add socials here -->
+    <p>&copy; 2025 Kurstave's Portfolio | <a href="https://www.example.com" style="color: #00FFFF;">My Socials</a></p> <!-- add socials here -->
   </footer>
 
   <script>
@@ -141,6 +141,7 @@
 
       // Play background music (ensure it's a direct link)
       const audio = new Audio('https://raw.githubusercontent.com/kurstave/portfolio/main/assets/music/aspertia-city.mp3');
+      audio.volume = 0.3;
       audio.loop = true;
       audio.play().catch((e) => {
         console.warn("Audio playback failed:", e);
