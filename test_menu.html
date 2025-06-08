@@ -190,6 +190,7 @@
     .back-button {
       margin-top: 30px;
       font-size: 1em;
+      font-family: 'Chaucer', chaucer;
       padding: 8px 16px;
       background-color: #444;
       border: 2px solid white;
@@ -316,7 +317,7 @@
     enterClicked = true;
 
     background_music = new Audio('https://raw.githubusercontent.com/kurstave/portfolio/main/assets/music/aspertia-city.mp3');
-    background_music.volume = 0.2;
+    background_music.volume = 0.1;
     background_music.loop = true;
     background_music.play().catch(e => console.warn("Audio playback failed:", e));
 
