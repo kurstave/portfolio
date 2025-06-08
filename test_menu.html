@@ -110,15 +110,18 @@
     /* Content sections */
     #content-sections {
       position: absolute;
-      top: 50%;
+      top: 10vh; /* near top, with some padding */
       left: 50%;
-      transform: translate(-50%, -50%);
+      transform: translateX(-50%);
       width: 80%;
       max-width: 800px;
       color: white;
       text-align: center;
       display: none;
+      max-height: 80vh; /* limit height */
+      overflow-y: auto; /* scroll if content is long */
     }
+
 
     .content-section {
       background-color: rgba(0, 0, 0, 0.75);
@@ -250,18 +253,25 @@
 
   // Show a section, fade out menu
   function showSection(id) {
-    document.getElementById('main-menu').style.opacity = 0;
-    setTimeout(() => {
-      document.getElementById('main-menu').style.display = 'none';
-      document.getElementById('content-sections').style.display = 'block';
+     document.getElementById('main-menu').style.opacity = 0;
+     setTimeout(() => {
+       document.getElementById('main-menu').style.display = 'none';
+       document.getElementById('content-sections').style.display = 'block';
 
-      document.querySelectorAll('.content-section').forEach(sec => {
-        sec.classList.remove('active');
-      });
+       document.querySelectorAll('.content-section').forEach(sec => {
+         sec.classList.remove('active');
+       });
 
-      document.getElementById(id).classList.add('active');
-    }, 1000);
-  }
+       document.getElementById(id).classList.add('active');
+
+       // Scroll to top when showing a section
+       // If you want to scroll the whole page:
+       window.scrollTo(0, 0);
+       // Or scroll inside the content container if you want:
+       // document.getElementById('content-sections').scrollTop = 0;
+     }, 1000);
+   }
+
 
   // Return to menu
   function returnToMenu() {
