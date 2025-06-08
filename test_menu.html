@@ -14,7 +14,7 @@
       text-align: center;
       overflow: hidden;
       background-color: black;
-      font-size: 16px; /* Base font size */
+      font-size: 16px;
     }
 
     .background {
@@ -135,9 +135,12 @@
     }
 
     .content-section.active {
-      left: 0;
       opacity: 1;
       pointer-events: auto;
+    }
+
+    .content-section.slide-in-right {
+      left: 0;
     }
 
     .content-section.slide-out-left {
@@ -172,7 +175,6 @@
       color: #00FFFF;
     }
 
-    /* Responsive font sizes */
     @media (max-width: 600px) {
       .title {
         font-size: 1.5em;
@@ -197,15 +199,12 @@
 </head>
 <body>
 
-  <!-- Start Screen -->
   <div id="start-screen">
     <button id="enter-button">Enter</button>
   </div>
 
-  <!-- Background -->
   <div class="background"></div>
 
-  <!-- Main Menu -->
   <div id="main-menu">
     <div class="title">
       <h1>Kurstave's Portfolio</h1>
@@ -218,7 +217,6 @@
     </div>
   </div>
 
-  <!-- Content Sections -->
   <div id="content-sections">
     <div id="projects" class="content-section">
       <h2>Current Projects</h2>
@@ -306,10 +304,11 @@
       contentSections.style.display = 'block';
 
       document.querySelectorAll('.content-section').forEach(sec => {
-        sec.classList.remove('active', 'slide-out-left');
+        sec.classList.remove('active', 'slide-in-right', 'slide-out-left');
+        sec.style.left = '100%';
       });
 
-      sectionToShow.classList.add('active');
+      sectionToShow.classList.add('active', 'slide-in-right');
       sectionToShow.scrollTop = 0;
       window.scrollTo(0, 0);
     }, 600);
@@ -322,7 +321,7 @@
 
     if (activeSection) {
       activeSection.classList.add('slide-out-left');
-      activeSection.classList.remove('active');
+      activeSection.classList.remove('slide-in-right', 'active');
 
       setTimeout(() => {
         activeSection.classList.remove('slide-out-left');
