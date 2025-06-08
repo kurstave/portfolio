@@ -205,10 +205,10 @@
     document.getElementById('enter-button').addEventListener('click', () => {
       document.getElementById('start-screen').style.display = 'none';
 
-      const audio = new Audio('https://raw.githubusercontent.com/kurstave/portfolio/main/assets/music/aspertia-city.mp3');
-      audio.volume = 0.2;
-      audio.loop = true;
-      audio.play().catch(e => console.warn("Audio playback failed:", e));
+      const background_music = new Audio('https://raw.githubusercontent.com/kurstave/portfolio/main/assets/music/aspertia-city.mp3');
+      background_music.volume = 0.1;
+      background_music.loop = true;
+      background_music.play().catch(e => console.warn("Audio playback failed:", e));
 
       document.querySelector('.background').style.opacity = 1;
 
