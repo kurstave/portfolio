@@ -117,16 +117,15 @@
       const title = document.querySelector('.title');
       const menuButtons = document.querySelector('.menu-buttons');
       const music = document.getElementById('backgroundMusic');
-      music.volume = 1;
-      music.play();
+
       
       // Fade in the background
       background.style.opacity = 1;
 
-      // Start playing music after the background fades in
-      //setTimeout(() => {
-        //backgroundMusic.play();
-      //}, 3000);  // Delay music start by 3 seconds to match background fade-in
+      //Start playing music after the background fades in
+      setTimeout(() => {
+        backgroundMusic.play();
+      }, 3000);  // Delay music start by 3 seconds to match background fade-in
 
       // Show the title text after a short delay
       setTimeout(() => {
