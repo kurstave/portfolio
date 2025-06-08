@@ -108,7 +108,9 @@
   </footer>
 
   <!-- Background Music -->
-  <audio id="backgroundMusic" src="assets/music/aspertia-city.mp3" loop autoplay></audio>
+  <audio loop autoplay>
+  <source src="assets/music/aspertia-city.mp3" type="audio/mp3">
+  </audio>
 
   <script>
     // Function to trigger the animations and play music
@@ -116,16 +118,16 @@
       const background = document.querySelector('.background');
       const title = document.querySelector('.title');
       const menuButtons = document.querySelector('.menu-buttons');
-      const music = document.getElementById('backgroundMusic');
+      //const music = document.getElementById('backgroundMusic');
 
       
       // Fade in the background
       background.style.opacity = 1;
 
       //Start playing music after the background fades in
-      setTimeout(() => {
-        backgroundMusic.play();
-      }, 3000);  // Delay music start by 3 seconds to match background fade-in
+      //setTimeout(() => {
+        //backgroundMusic.play();
+      //}, 3000);  // Delay music start by 3 seconds to match background fade-in
 
       // Show the title text after a short delay
       setTimeout(() => {
