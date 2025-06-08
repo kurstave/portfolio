@@ -200,61 +200,84 @@
     <p>&copy; 2025 Kurstave's Portfolio | <a href="#">My Socials</a></p>
   </footer>
 
-  <script>
-    // Enter button behavior
-    document.getElementById('enter-button').addEventListener('click', () => {
-      document.getElementById('start-screen').style.display = 'none';
+<script>
+  let enterClicked = false;
+  let fadeTimers = [];
+  let background_music;
 
-      const background_music = new Audio('https://raw.githubusercontent.com/kurstave/portfolio/main/assets/music/aspertia-city.mp3');
-      background_music.volume = 0.1;
-      background_music.loop = true;
-      background_music.play().catch(e => console.warn("Audio playback failed:", e));
+  // ENTER button behavior
+  document.getElementById('enter-button').addEventListener('click', () => {
+    document.getElementById('start-screen').style.display = 'none';
+    enterClicked = true;
 
-      document.querySelector('.background').style.opacity = 1;
+    // Start background music
+    background_music = new Audio('https://raw.githubusercontent.com/kurstave/portfolio/main/assets/music/aspertia-city.mp3');
+    background_music.volume = 0.2;
+    background_music.loop = true;
+    background_music.play().catch(e => console.warn("Audio playback failed:", e));
 
-      setTimeout(() => {
-        document.querySelector('.title').style.opacity = 1;
-      }, 2000);
+    // Start fade-in
+    document.querySelector('.background').style.opacity = 1;
 
-      setTimeout(() => {
-        document.querySelector('.menu-buttons').style.opacity = 1;
-      }, 4000);
-    });
+    fadeTimers.push(setTimeout(() => {
+      document.querySelector('.title').style.opacity = 1;
+    }, 2000));
 
-    // Show a section, fade out menu
-    function showSection(id) {
-      document.getElementById('main-menu').style.opacity = 0;
-      setTimeout(() => {
-        document.getElementById('main-menu').style.display = 'none';
-        document.getElementById('content-sections').style.display = 'block';
+    fadeTimers.push(setTimeout(() => {
+      document.querySelector('.menu-buttons').style.opacity = 1;
+    }, 4000));
 
-        // Hide all sections first
-        document.querySelectorAll('.content-section').forEach(sec => {
-          sec.classList.remove('active');
-        });
+    // Enable click-to-skip
+    document.addEventListener('click', skipFadeIn);
+  });
 
-        // Show selected
-        const section = document.getElementById(id);
-        section.classList.add('active');
-      }, 1000);
-    }
+  // Skip fade-in animations
+  function skipFadeIn() {
+    if (!enterClicked) return;
 
-    // Return to menu
-    function returnToMenu() {
-      // Fade out all content sections
+    // Cancel pending animations
+    fadeTimers.forEach(timer => clearTimeout(timer));
+
+    // Instantly show everything
+    document.querySelector('.background').style.opacity = 1;
+    document.querySelector('.title').style.opacity = 1;
+    document.querySelector('.menu-buttons').style.opacity = 1;
+
+    // Disable this skip after first use
+    document.removeEventListener('click', skipFadeIn);
+  }
+
+  // Show a section, fade out menu
+  function showSection(id) {
+    document.getElementById('main-menu').style.opacity = 0;
+    setTimeout(() => {
+      document.getElementById('main-menu').style.display = 'none';
+      document.getElementById('content-sections').style.display = 'block';
+
       document.querySelectorAll('.content-section').forEach(sec => {
         sec.classList.remove('active');
       });
 
+      document.getElementById(id).classList.add('active');
+    }, 1000);
+  }
+
+  // Return to menu
+  function returnToMenu() {
+    document.querySelectorAll('.content-section').forEach(sec => {
+      sec.classList.remove('active');
+    });
+
+    setTimeout(() => {
+      document.getElementById('content-sections').style.display = 'none';
+      document.getElementById('main-menu').style.display = 'block';
       setTimeout(() => {
-        document.getElementById('content-sections').style.display = 'none';
-        document.getElementById('main-menu').style.display = 'block';
-        setTimeout(() => {
-          document.getElementById('main-menu').style.opacity = 1;
-        }, 100); // slight delay to trigger transition
-      }, 500);
-    }
-  </script>
+        document.getElementById('main-menu').style.opacity = 1;
+      }, 100);
+    }, 500);
+  }
+</script>
+
 
 </body>
 </html>
