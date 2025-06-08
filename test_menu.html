@@ -1,9 +1,9 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Game Main Menu</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Kurstave's Portfolio - Main Menu</title>
   <style>
     body {
       margin: 0;
@@ -13,9 +13,9 @@
       color: white;
       text-align: center;
       overflow: hidden;
+      background-color: black;
     }
 
-    /* The background */
     .background {
       position: absolute;
       top: 0;
@@ -26,17 +26,16 @@
       background-size: cover;
       background-position: center;
       opacity: 0;
-      transition: opacity 3s ease-in-out; /* Fade-in effect */
+      transition: opacity 3s ease-in-out;
     }
 
-    /* The buttons container */
     .menu-buttons {
       position: absolute;
       top: 60%;
       left: 50%;
       transform: translateX(-50%);
       opacity: 0;
-      transition: opacity 1s ease-in-out 1s; /* Delay appearance of buttons */
+      transition: opacity 1s ease-in-out 1s;
     }
 
     .menu-buttons button {
@@ -61,7 +60,6 @@
       transform: scale(1);
     }
 
-    /* Title text */
     .title {
       position: absolute;
       top: 30%;
@@ -70,26 +68,59 @@
       font-size: 3em;
       text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.8);
       opacity: 0;
-      transition: opacity 2s ease-in-out 1s; /* Delay title appearance */
+      transition: opacity 2s ease-in-out 1s;
     }
 
-    /* Footer */
     footer {
       position: absolute;
       bottom: 10px;
       font-size: 0.8em;
       color: rgba(255, 255, 255, 0.7);
     }
+
+    /* Start screen */
+    #start-screen {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: #000;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      z-index: 1000;
+    }
+
+    #start-button {
+      font-size: 2em;
+      padding: 20px 40px;
+      background-color: #222;
+      color: white;
+      border: 2px solid white;
+      cursor: pointer;
+      border-radius: 10px;
+      transition: background-color 0.3s;
+    }
+
+    #start-button:hover {
+      background-color: #444;
+    }
   </style>
 </head>
 <body>
+
+  <!-- Start Screen -->
+  <div id="start-screen">
+    <button id="enter-button">Enter</button>
+  </div>
 
   <!-- Background -->
   <div class="background"></div>
 
   <!-- Title Text -->
   <div class="title">
-    <h1>My Game</h1>
+    <h1>Kurstave's Portfolio</h1>
   </div>
 
   <!-- Menu Buttons -->
@@ -100,43 +131,34 @@
   </div>
 
   <footer>
-    <p>&copy; 2025 My Game | <a href="https://www.example.com" style="color: #00FFFF;">Developer Website</a></p>
+    <p>&copy; 2025 Kurstave's Portfolio | <a href="https://www.example.com" style="color: #00FFFF;">Developer Website</a></p> <!-- add socials here -->
   </footer>
 
-  <!-- Background Music -->
-  <!-- <audio loop autoplay>
-  <source src="assets/music/aspertia-city.mp3" type="audio/mp3">
-  </audio> -->
-
   <script>
-    // Function to trigger the animations and play music
-    window.onload = () => {
-      const background = document.querySelector('.background');
-      const title = document.querySelector('.title');
-      const menuButtons = document.querySelector('.menu-buttons');
-      var audio = new Audio('https://github.com/kurstave/portfolio/tree/main/assets/music/aspertia-city.mp3?raw=true');
-      audio.play();
-      //const music = document.getElementById('backgroundMusic');
+    document.getElementById('enter-button').addEventListener('click', () => {
+      // Hide the start screen
+      document.getElementById('start-screen').style.display = 'none';
 
-      
+      // Play background music (ensure it's a direct link)
+      const audio = new Audio('https://raw.githubusercontent.com/kurstave/portfolio/main/assets/music/aspertia-city.mp3');
+      audio.loop = true;
+      audio.play().catch((e) => {
+        console.warn("Audio playback failed:", e);
+      });
+
       // Fade in the background
-      background.style.opacity = 1;
+      document.querySelector('.background').style.opacity = 1;
 
-      //Start playing music after the background fades in
-      //setTimeout(() => {
-        //backgroundMusic.play();
-      //}, 3000);  // Delay music start by 3 seconds to match background fade-in
-
-      // Show the title text after a short delay
+      // Fade in title after delay
       setTimeout(() => {
-        title.style.opacity = 1;
-      }, 2000); // Delay title appearance by 2 seconds
+        document.querySelector('.title').style.opacity = 1;
+      }, 2000);
 
-      // Show the menu buttons after another delay
+      // Fade in buttons after longer delay
       setTimeout(() => {
-        menuButtons.style.opacity = 1;
-      }, 4000); // Delay button appearance by 4 seconds
-    };
+        document.querySelector('.menu-buttons').style.opacity = 1;
+      }, 4000);
+    });
   </script>
 
 </body>
