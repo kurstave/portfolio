@@ -3,87 +3,137 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Sonic CD Main Menu</title>
+  <title>Game Main Menu</title>
   <style>
     body {
-      font-family: 'Arial', sans-serif;
       margin: 0;
       padding: 0;
-      background-color: #1C1C1C;
+      height: 100vh;
+      font-family: 'Arial', sans-serif;
       color: white;
       text-align: center;
+      overflow: hidden;
     }
 
-    .menu-container {
-      position: relative;
+    /* The background */
+    .background {
+      position: absolute;
+      top: 0;
+      left: 0;
       width: 100%;
-      height: 100vh;
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      align-items: center;
-      background-image: url('https://www.reddit.com/media?url=https%3A%2F%2Fpreview.redd.it%2Fq1m99d2veh371.jpg%3Fwidth%3D1080%26crop%3Dsmart%26auto%3Dwebp%26s%3Dbd1b440ebb1be89ad2627c00314c50d1513586c5');
+      height: 100%;
+      background-image: url('https://t4.ftcdn.net/jpg/00/82/33/41/360_F_82334123_qpISmqS3an0h19aPp1ZCOqaaIpfcchUI.jpg');
       background-size: cover;
       background-position: center;
+      opacity: 0;
+      transition: opacity 3s ease-in-out; /* Fade-in effect */
     }
 
-    h1 {
-      font-size: 3em;
-      text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
-      margin-bottom: 30px;
+    /* The buttons container */
+    .menu-buttons {
+      position: absolute;
+      top: 60%;
+      left: 50%;
+      transform: translateX(-50%);
+      opacity: 0;
+      transition: opacity 1s ease-in-out 1s; /* Delay appearance of buttons */
     }
 
-    .menu-item {
+    .menu-buttons button {
       font-size: 1.5em;
-      margin: 15px;
-      padding: 10px 30px;
       background-color: rgba(0, 0, 0, 0.7);
-      border-radius: 5px;
-      border: 2px solid #FFFFFF;
+      color: white;
+      border: 2px solid white;
+      padding: 15px 30px;
+      margin: 15px;
       cursor: pointer;
+      border-radius: 5px;
       transition: background-color 0.3s, transform 0.3s;
     }
 
-    .menu-item:hover {
+    .menu-buttons button:hover {
       background-color: #FF0000;
       transform: scale(1.1);
     }
 
-    .menu-item:active {
+    .menu-buttons button:active {
       background-color: #990000;
       transform: scale(1);
     }
 
+    /* Title text */
+    .title {
+      position: absolute;
+      top: 30%;
+      left: 50%;
+      transform: translateX(-50%);
+      font-size: 3em;
+      text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.8);
+      opacity: 0;
+      transition: opacity 2s ease-in-out 1s; /* Delay title appearance */
+    }
+
+    /* Footer */
     footer {
       position: absolute;
-      bottom: 20px;
+      bottom: 10px;
       font-size: 0.8em;
       color: rgba(255, 255, 255, 0.7);
-    }
-
-    footer a {
-      color: #00FFFF;
-      text-decoration: none;
-    }
-
-    footer a:hover {
-      text-decoration: underline;
     }
   </style>
 </head>
 <body>
 
-  <div class="menu-container">
-    <h1>Sonic CD</h1>
-    <div class="menu-item" onclick="alert('Starting game...')">Start Game</div>
-    <div class="menu-item" onclick="alert('Options selected...')">Options</div>
-    <div class="menu-item" onclick="alert('Viewing Credits...')">Credits</div>
-    <div class="menu-item" onclick="alert('Exiting...')">Exit</div>
+  <!-- Background -->
+  <div class="background"></div>
+
+  <!-- Title Text -->
+  <div class="title">
+    <h1>My Game</h1>
+  </div>
+
+  <!-- Menu Buttons -->
+  <div class="menu-buttons">
+    <button onclick="alert('Start Game')">Start Game</button>
+    <button onclick="alert('Options')">Options</button>
+    <button onclick="alert('Credits')">Credits</button>
+    <button onclick="alert('Exit')">Exit</button>
   </div>
 
   <footer>
-    <p>&copy; 2025 Sonic CD Tribute | <a href="https://www.sega.com">Sega</a></p>
+    <p>&copy; 2025 My Game | <a href="https://www.example.com" style="color: #00FFFF;">Developer Website</a></p>
   </footer>
+
+  <!-- Background Music -->
+  <audio id="backgroundMusic" src="https://www.youtube.com/watch?v=it5wuAgf1Pw" preload="auto"></audio>
+
+  <script>
+    // Function to trigger the animations and play music
+    window.onload = () => {
+      const background = document.querySelector('.background');
+      const title = document.querySelector('.title');
+      const menuButtons = document.querySelector('.menu-buttons');
+      const backgroundMusic = document.getElementById('backgroundMusic');
+
+      // Fade in the background
+      background.style.opacity = 1;
+
+      // Start playing music after the background fades in
+      setTimeout(() => {
+        backgroundMusic.play();
+      }, 3000);  // Delay music start by 3 seconds to match background fade-in
+
+      // Show the title text after a short delay
+      setTimeout(() => {
+        title.style.opacity = 1;
+      }, 2000); // Delay title appearance by 2 seconds
+
+      // Show the menu buttons after another delay
+      setTimeout(() => {
+        menuButtons.style.opacity = 1;
+      }, 4000); // Delay button appearance by 4 seconds
+    };
+  </script>
 
 </body>
 </html>
