@@ -4,26 +4,22 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Kurstave's Portfolio - Main Menu</title>
-  <link rel="stylesheet" href="assets/css/main.css" />
   <style>
     body {
       margin: 0;
       padding: 0;
       height: 100vh;
-      font-family: 'Chaucer', chaucer;
+      font-family: sans-serif;
       color: white;
       text-align: center;
       overflow: hidden;
       background-color: black;
-      font-size: 16px;
     }
 
     .background {
       position: absolute;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
       background-image: url('https://wallpapers-clan.com/wp-content/uploads/2024/03/starfall-night-sky-mountains-aesthetic-gif-preview-desktop-wallpaper.gif');
       background-size: cover;
       background-position: center;
@@ -32,23 +28,11 @@
       z-index: -1;
     }
 
-    /* Spotify Embed Styling */
-    .spotify-widget {
-      position: fixed;
-      top: 20px;
-      right: -400px; /* hidden initially */
-      width: 300px;
-      height: 352px;
-      z-index: 10;
-      transition: right 1s ease-in-out;
-    }
-
-    .spotify-widget.visible {
-      right: 20px;
-    }
-
-    #main-menu {
-      transition: opacity 1s ease-in-out;
+    .title {
+      margin-top: 10%;
+      font-size: 2em;
+      opacity: 0;
+      transition: opacity 2s ease-in-out 1s;
     }
 
     .menu-buttons {
@@ -61,9 +45,8 @@
       gap: 15px;
     }
 
-    .menu-buttons button {
+    .menu-buttons button, .back-button {
       font-size: 1.2em;
-      font-family: 'Chaucer', chaucer;
       background-color: rgba(0, 0, 0, 0.7);
       color: white;
       border: 2px solid white;
@@ -72,39 +55,17 @@
       cursor: pointer;
       border-radius: 5px;
       transition: background-color 0.3s, transform 0.3s;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      text-transform: none;
-      letter-spacing: normal;
-      text-align: center;
-      min-width: 150px;
     }
 
-    .menu-buttons button:hover {
+    .menu-buttons button:hover, .back-button:hover {
       background-color: #0047AB;
-      transform: scale(1.1);
-    }
-
-    .menu-buttons button:active {
-      background-color: #0047AB;
-      transform: scale(1);
-    }
-
-    .title {
-      margin-top: 10%;
-      font-size: 2em;
-      text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.8);
-      opacity: 0;
-      transition: opacity 2s ease-in-out 1s;
+      transform: scale(1.05);
     }
 
     #start-screen {
       position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
       background: #000;
       display: flex;
       align-items: center;
@@ -118,15 +79,8 @@
       background-color: #222;
       color: white;
       border: 2px solid white;
-      cursor: pointer;
       border-radius: 10px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      text-transform: none;
-      letter-spacing: normal;
-      text-align: center;
-      min-width: 150px;
+      cursor: pointer;
     }
 
     #enter-button:hover {
@@ -135,24 +89,18 @@
 
     #content-sections {
       position: absolute;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
       color: white;
-      text-align: center;
       display: none;
     }
 
     .content-section {
       position: absolute;
-      top: 0;
-      left: 100%;
-      width: 100%;
-      height: 100%;
+      top: 0; left: 100%;
+      width: 100%; height: 100%;
       background-color: rgba(0, 0, 0, 0.75);
       padding: 30px;
-      border-radius: 10px;
       box-sizing: border-box;
       opacity: 0;
       transition: opacity 0.6s ease, left 0.6s ease;
@@ -171,64 +119,47 @@
       opacity: 0;
     }
 
-    .content-section h2 {
-      font-size: 1.8em;
-    }
-
-    .content-section p {
-      font-size: 1em;
-    }
-
-    .content-section .back-button {
-      margin-left: auto;
-      margin-right: auto;
-      display: flex;
-      justify-content: center;
-    }
-
-    .back-button {
-      margin-top: 30px;
-      font-size: 1em;
-      font-family: 'Chaucer', chaucer;
-      padding: 12px 24px;
-      background-color: #444;
-      border: 2px solid white;
+    /* YouTube Custom Player */
+    #custom-player {
+      position: fixed;
+      top: 20px;
+      right: 20px;
+      background-color: rgba(0,0,0,0.8);
+      padding: 10px;
+      border-radius: 10px;
       color: white;
-      border-radius: 8px;
+      z-index: 2000;
+      width: 250px;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      font-size: 0.9em;
+    }
+
+    .player-controls {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .player-controls button {
+      background: none;
+      border: 1px solid white;
+      color: white;
+      padding: 5px 10px;
+      border-radius: 5px;
       cursor: pointer;
+    }
+
+    .volume-container,
+    .progress-container {
       display: flex;
       align-items: center;
-      justify-content: center;
-      min-width: 150px;
+      justify-content: space-between;
     }
 
-    .back-button:hover {
-      background-color: #0047AB;
-    }
-
-    a {
-      color: #00FFFF;
-    }
-
-    @media (max-width: 600px) {
-      .title {
-        font-size: 1.5em;
-      }
-
-      .menu-buttons button,
-      .back-button,
-      #enter-button {
-        padding: 12px 24px;
-        min-width: 150px;
-      }
-
-      .content-section h2 {
-        font-size: 1.5em;
-      }
-
-      .content-section p {
-        font-size: 0.95em;
-      }
+    input[type=range] {
+      width: 100%;
     }
   </style>
 </head>
@@ -242,16 +173,9 @@
   <!-- Background -->
   <div class="background"></div>
 
-  <!-- Spotify Embed -->
-  <div class="spotify-widget" id="spotify-widget">
-    <iframe style="border-radius:12px" src="https://open.spotify.com/embed/playlist/1oaZBW0KQqZwUvBe7J4V9R?utm_source=generator" width="100%" height="100%" frameBorder="0" allowfullscreen="" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>
-  </div>
-
   <!-- Main Menu -->
   <div id="main-menu">
-    <div class="title">
-      <h1>The Korner</h1>
-    </div>
+    <div class="title"><h1>The Korner</h1></div>
     <div class="menu-buttons">
       <button onclick="showSection('projects')">Current Projects</button>
       <button onclick="showSection('about')">About Me</button>
@@ -267,109 +191,167 @@
       <p>Details about your latest projects go here.</p>
       <button class="back-button" onclick="returnToMenu()">Back to Menu</button>
     </div>
-
     <div id="about" class="content-section">
       <h2>About Me</h2>
       <p>Some information about who you are.</p>
       <button class="back-button" onclick="returnToMenu()">Back to Menu</button>
     </div>
-
     <div id="resume" class="content-section">
       <h2>Resume</h2>
       <p>Your resume content or a link to download it.</p>
       <button class="back-button" onclick="returnToMenu()">Back to Menu</button>
     </div>
-
     <div id="socials" class="content-section">
       <h2>Contact Me!</h2>
-      <p>Here are my socials.</p>
-      <ul class="icons">
-        <li><a href="https://github.com/kurstave">GitHub</a></li>
-        <li><a href="#">Instagram</a></li>
-        <li><a href="#">Bandcamp</a></li>
-        <li><a href="#">LinkedIn</a></li>
-      </ul>
+      <p>Links to your social platforms go here.</p>
       <button class="back-button" onclick="returnToMenu()">Back to Menu</button>
     </div>
   </div>
 
-<script>
-  let enterClicked = false;
-  let fadeTimers = [];
+  <!-- YouTube Audio Player -->
+  <div id="custom-player">
+    <div class="player-controls">
+      <button id="play-pause-btn">⏸️</button>
+      <span id="now-playing">Track 1</span>
+      <button id="next-btn">⏭️</button>
+    </div>
+    <div class="volume-container">
+      <label for="volume-slider">Volume</label>
+      <input type="range" id="volume-slider" min="0" max="100" value="100">
+    </div>
+    <div class="progress-container">
+      <label for="progress-bar">Progress</label>
+      <input type="range" id="progress-bar" min="0" max="100" value="0">
+    </div>
+  </div>
+  <div id="yt-player" style="display: none;"></div>
 
-  document.getElementById('enter-button').addEventListener('click', () => {
-    document.getElementById('start-screen').style.display = 'none';
-    enterClicked = true;
+  <!-- Scripts -->
+  <script src="https://www.youtube.com/iframe_api"></script>
+  <script>
+    let player;
+    let currentTrackIndex = 0;
+    const playlist = [
+      { title: "Track 1 - Chill Vibes", videoId: "5qap5aO4i9A" },
+      { title: "Track 2 - Focus Flow", videoId: "DWcJFNfaw9c" },
+      { title: "Track 3 - Dream Loops", videoId: "jfKfPfyJRdk" }
+    ];
 
-    // Reveal background
-    document.querySelector('.background').style.opacity = 1;
-
-    // Slide in Spotify widget
-    document.getElementById('spotify-widget').classList.add('visible');
-
-    // Fade in title and menu
-    fadeTimers.push(setTimeout(() => {
-      document.querySelector('.title').style.opacity = 1;
-    }, 2000));
-
-    fadeTimers.push(setTimeout(() => {
-      document.querySelector('.menu-buttons').style.opacity = 1;
-    }, 4000));
-
-    document.addEventListener('click', skipFadeIn);
-  });
-
-  function skipFadeIn() {
-    if (!enterClicked) return;
-    fadeTimers.forEach(timer => clearTimeout(timer));
-    document.querySelector('.background').style.opacity = 1;
-    document.querySelector('.title').style.opacity = 1;
-    document.querySelector('.menu-buttons').style.opacity = 1;
-    document.removeEventListener('click', skipFadeIn);
-  }
-
-  function showSection(id) {
-    const mainMenu = document.getElementById('main-menu');
-    const contentSections = document.getElementById('content-sections');
-    const sectionToShow = document.getElementById(id);
-
-    mainMenu.style.opacity = 0;
-
-    setTimeout(() => {
-      mainMenu.style.display = 'none';
-      contentSections.style.display = 'block';
-
-      document.querySelectorAll('.content-section').forEach(sec => {
-        sec.classList.remove('active', 'slide-out-left');
+    function onYouTubeIframeAPIReady() {
+      player = new YT.Player('yt-player', {
+        height: '0',
+        width: '0',
+        videoId: playlist[0].videoId,
+        playerVars: {
+          autoplay: 1,
+          controls: 0,
+          modestbranding: 1,
+          rel: 0
+        },
+        events: {
+          onReady: onPlayerReady,
+          onStateChange: onPlayerStateChange
+        }
       });
+    }
 
-      sectionToShow.classList.add('active');
-      sectionToShow.scrollTop = 0;
-      window.scrollTo(0, 0);
-    }, 600);
-  }
+    function onPlayerReady(event) {
+      player.setVolume(100);
+      updateNowPlaying();
+      updateProgressBar();
+      event.target.playVideo();
+    }
 
-  function returnToMenu() {
-    const mainMenu = document.getElementById('main-menu');
-    const contentSections = document.getElementById('content-sections');
-    const activeSection = document.querySelector('.content-section.active');
+    function updateNowPlaying() {
+      document.getElementById("now-playing").textContent = playlist[currentTrackIndex].title;
+    }
 
-    if (activeSection) {
-      activeSection.classList.add('slide-out-left');
-      activeSection.classList.remove('active');
+    function nextTrack() {
+      currentTrackIndex = (currentTrackIndex + 1) % playlist.length;
+      player.loadVideoById(playlist[currentTrackIndex].videoId);
+      updateNowPlaying();
+    }
+
+    function updateProgressBar() {
+      if (player && player.getDuration) {
+        const duration = player.getDuration();
+        const currentTime = player.getCurrentTime();
+        if (duration > 0) {
+          const progress = (currentTime / duration) * 100;
+          document.getElementById("progress-bar").value = progress;
+        }
+      }
+      setTimeout(updateProgressBar, 1000);
+    }
+
+    function onPlayerStateChange(event) {
+      if (event.data === YT.PlayerState.ENDED) {
+        nextTrack();
+      }
+    }
+
+    document.getElementById("play-pause-btn").addEventListener("click", () => {
+      const state = player.getPlayerState();
+      if (state === YT.PlayerState.PLAYING) {
+        player.pauseVideo();
+        document.getElementById("play-pause-btn").textContent = "▶️";
+      } else {
+        player.playVideo();
+        document.getElementById("play-pause-btn").textContent = "⏸️";
+      }
+    });
+
+    document.getElementById("next-btn").addEventListener("click", nextTrack);
+
+    document.getElementById("volume-slider").addEventListener("input", (e) => {
+      player.setVolume(e.target.value);
+    });
+
+    document.getElementById("progress-bar").addEventListener("input", (e) => {
+      const duration = player.getDuration();
+      const newTime = (e.target.value / 100) * duration;
+      player.seekTo(newTime);
+    });
+
+    // Enter screen logic
+    document.getElementById('enter-button').addEventListener('click', () => {
+      document.getElementById('start-screen').style.display = 'none';
+      document.querySelector('.background').style.opacity = 1;
+      setTimeout(() => document.querySelector('.title').style.opacity = 1, 2000);
+      setTimeout(() => document.querySelector('.menu-buttons').style.opacity = 1, 4000);
+    });
+
+    function showSection(id) {
+      const mainMenu = document.getElementById('main-menu');
+      const contentSections = document.getElementById('content-sections');
+      const sectionToShow = document.getElementById(id);
+      mainMenu.style.opacity = 0;
 
       setTimeout(() => {
-        activeSection.classList.remove('slide-out-left');
-        contentSections.style.display = 'none';
-        mainMenu.style.display = 'block';
-
-        setTimeout(() => {
-          mainMenu.style.opacity = 1;
-        }, 50);
+        mainMenu.style.display = 'none';
+        contentSections.style.display = 'block';
+        document.querySelectorAll('.content-section').forEach(sec => {
+          sec.classList.remove('active', 'slide-out-left');
+        });
+        sectionToShow.classList.add('active');
+        sectionToShow.scrollTop = 0;
       }, 600);
     }
-  }
-</script>
 
+    function returnToMenu() {
+      const mainMenu = document.getElementById('main-menu');
+      const contentSections = document.getElementById('content-sections');
+      const activeSection = document.querySelector('.content-section.active');
+      if (activeSection) {
+        activeSection.classList.add('slide-out-left');
+        activeSection.classList.remove('active');
+        setTimeout(() => {
+          contentSections.style.display = 'none';
+          mainMenu.style.display = 'block';
+          setTimeout(() => mainMenu.style.opacity = 1, 50);
+        }, 600);
+      }
+    }
+  </script>
 </body>
 </html>
