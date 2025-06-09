@@ -15,7 +15,7 @@
       text-align: center;
       overflow: hidden;
       background-color: black;
-      font-size: 16px; /* Base font size */
+      font-size: 16px;
     }
 
     .background {
@@ -24,7 +24,7 @@
       left: 0;
       width: 100%;
       height: 100%;
-      background-image: url('https://wallpapers-clan.com/wp-content/uploads/2024/03/starfall-night-sky-mountains-aesthetic-gif-preview-desktop-wallpaper.gif'); /*make it an asset */
+      background-image: url('https://wallpapers-clan.com/wp-content/uploads/2024/03/starfall-night-sky-mountains-aesthetic-gif-preview-desktop-wallpaper.gif');
       background-size: cover;
       background-position: center;
       opacity: 0;
@@ -35,18 +35,17 @@
     #main-menu {
       transition: opacity 1s ease-in-out;
       display: block;
-      opacity: 1;
+      opacity: 0;
     }
 
     .menu-buttons {
       margin-top: 20px;
       opacity: 0;
       transition: opacity 1s ease-in-out 1s;
-
       display: flex;
-      justify-content: center; /* center buttons horizontally */
-      flex-wrap: wrap;         /* if many buttons, wrap nicely */
-      gap: 15px;               /* spacing between buttons */
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: 15px;
     }
 
     .menu-buttons button {
@@ -60,16 +59,10 @@
       cursor: pointer;
       border-radius: 5px;
       transition: background-color 0.3s, transform 0.3s;
-      /* alignment */
       display: flex;
-      align-items: center;    /* vertical center text */
-      justify-content: center; /* horizontal center text */
-      text-transform: none;    /* no uppercase */
-      letter-spacing: normal;
-      text-align: center;
-      padding: 12px 24px;     /* keep padding consistent */
-      min-width: 150px;       /* optional: give buttons a min width */
-      cursor: pointer;
+      align-items: center;
+      justify-content: center;
+      min-width: 150px;
     }
 
     .menu-buttons button:hover {
@@ -97,7 +90,6 @@
       color: rgba(255, 255, 255, 0.7);
     }
 
-   
     #content-sections {
       position: absolute;
       top: 0;
@@ -144,7 +136,6 @@
       font-size: 1em;
     }
 
-    /* Fix to center the back button */
     .content-section .back-button {
       margin-left: auto;
       margin-right: auto;
@@ -156,22 +147,16 @@
       margin-top: 30px;
       font-size: 1em;
       font-family: 'Chaucer', chaucer;
-      padding: 8px 16px;
+      padding: 12px 24px;
       background-color: #444;
       border: 2px solid white;
       color: white;
       border-radius: 8px;
       cursor: pointer;
-      /* alignment */
       display: flex;
-      align-items: center;    /* vertical center text */
-      justify-content: center; /* horizontal center text */
-      text-transform: none;    /* no uppercase */
-      letter-spacing: normal;
-      text-align: center;
-      padding: 12px 24px;     /* keep padding consistent */
-      min-width: 150px;       /* optional: give buttons a min width */
-      cursor: pointer;
+      align-items: center;
+      justify-content: center;
+      min-width: 150px;
     }
 
     .back-button:hover {
@@ -182,7 +167,6 @@
       color: #00FFFF;
     }
 
-    /* Responsive font sizes */
     @media (max-width: 600px) {
       .title {
         font-size: 1.5em;
@@ -190,15 +174,8 @@
 
       .menu-buttons button,
       .back-button {
-        display: flex;
-        align-items: center;    /* vertical center text */
-        justify-content: center; /* horizontal center text */
-        text-transform: none;    /* no uppercase */
-        letter-spacing: normal;
-        text-align: center;
-        padding: 12px 24px;     /* keep padding consistent */
-        min-width: 150px;       /* optional: give buttons a min width */
-        cursor: pointer;
+        padding: 12px 24px;
+        min-width: 150px;
       }
 
       .content-section h2 {
@@ -210,32 +187,26 @@
       }
     }
 
-    /* Playlist container */
     #playlist-container {
       position: fixed;
       top: 20px;
-      right: -360px; /* start offscreen */
+      right: 20px;
       width: 350px;
       background: rgba(20,20,20,0.9);
       border: 2px solid white;
       border-radius: 12px;
       padding: 15px;
-      box-sizing: border-box;
       color: white;
       font-family: 'Chaucer', chaucer;
       font-size: 0.9em;
-      z-index: 10000;
-      transition: right 0.6s ease;
-      display: flex;
-      flex-direction: column;
-      user-select: none;
+      z-index: 10;
       box-shadow: 0 0 15px rgba(0, 0, 255, 0.7);
       max-height: 90vh;
       overflow: hidden;
+      display: flex;
+      flex-direction: column;
     }
-    #playlist-container.visible {
-      right: 20px;
-    }
+
     #playlist-header {
       font-weight: bold;
       font-size: 1.2em;
@@ -244,6 +215,7 @@
       justify-content: space-between;
       align-items: center;
     }
+
     #playlist-controls button {
       background: transparent;
       border: 1px solid white;
@@ -255,22 +227,27 @@
       cursor: pointer;
       transition: background-color 0.3s;
     }
+
     #playlist-controls button:hover {
       background-color: #0047AB;
     }
+
     #track-info {
       margin-top: 10px;
       min-height: 50px;
     }
+
     #track-title {
       font-weight: bold;
       font-size: 1.1em;
     }
+
     #track-composer {
       font-style: italic;
       font-size: 0.9em;
       color: #aaa;
     }
+
     #playlist-list {
       margin-top: 10px;
       flex-grow: 1;
@@ -279,26 +256,31 @@
       border-top: 1px solid #555;
       padding-top: 10px;
     }
+
     #playlist-list li {
       padding: 6px 8px;
       cursor: pointer;
       border-radius: 5px;
       transition: background-color 0.3s;
     }
+
     #playlist-list li:hover {
       background-color: #0047AB;
     }
+
     #playlist-list li.active {
       background-color: #0077FF;
       font-weight: bold;
     }
-    /* Scrollbar for playlist list */
+
     #playlist-list::-webkit-scrollbar {
       width: 6px;
     }
+
     #playlist-list::-webkit-scrollbar-track {
       background: transparent;
     }
+
     #playlist-list::-webkit-scrollbar-thumb {
       background-color: #0047AB;
       border-radius: 3px;
@@ -356,10 +338,6 @@
     </div>
   </div>
 
-  <!-- <footer>
-    <p>&copy; 2025 Kurstave's Portfolio | <a href="#">My Socials</a></p>
-  </footer> --> 
-
   <div id="playlist-container">
     <div id="playlist-header">
       <span>Music Playlist</span>
@@ -377,200 +355,60 @@
     </div>
     <ul id="playlist-list"></ul>
   </div>
-  
-<script>
-  let fadeTimers = [];
-
-  window.onload = () => {
-    // Fade in background
-    document.querySelector('.background').style.opacity = 1;
-
-    fadeTimers.push(setTimeout(() => {
-      document.querySelector('.title').style.opacity = 1;
-    }, 2000));
-
-    fadeTimers.push(setTimeout(() => {
-      document.querySelector('.menu-buttons').style.opacity = 1;
-    }, 4000));
-  };
-
-  function showSection(id) {
-    const mainMenu = document.getElementById('main-menu');
-    const contentSections = document.getElementById('content-sections');
-    const sectionToShow = document.getElementById(id);
-
-    mainMenu.style.opacity = 1;
-
-    setTimeout(() => {
-      mainMenu.style.display = 'none';
-      contentSections.style.display = 'block';
-
-      document.querySelectorAll('.content-section').forEach(sec => {
-        sec.classList.remove('active', 'slide-out-left');
-      });
-
-      sectionToShow.classList.add('active');
-      sectionToShow.scrollTop = 0;
-      window.scrollTo(0, 0);
-    }, 600);
-  }
-
-  function returnToMenu() {
-    const mainMenu = document.getElementById('main-menu');
-    const contentSections = document.getElementById('content-sections');
-    const activeSection = document.querySelector('.content-section.active');
-
-    if (activeSection) {
-      activeSection.classList.add('slide-out-left');
-      activeSection.classList.remove('active');
-
-      setTimeout(() => {
-        activeSection.classList.remove('slide-out-left');
-        contentSections.style.display = 'none';
-        mainMenu.style.display = 'block';
-
-        setTimeout(() => {
-          mainMenu.style.opacity = 1;
-        }, 50);
-      }, 600);
-    }
-  }
- 
-  <!-- YouTube IFrame API -->
-<script src="https://www.youtube.com/iframe_api"></script>
 
   <script>
-  const playlist = [
-    {
-      videoId: 'Zi_XLOBDo_Y', // Example: Michael Jackson - Billie Jean
-      title: 'Billie Jean',
-      composer: 'Michael Jackson',
-      duration: '4:56'
-    },
-    {
-      videoId: '3JZ4pnNtyxQ',
-      title: 'Bohemian Rhapsody',
-      composer: 'Queen',
-      duration: '6:00'
-    },
-    {
-      videoId: 'L_jWHffIx5E',
-      title: 'Sabotage',
-      composer: 'Beastie Boys',
-      duration: '3:01'
+    window.onload = () => {
+      document.querySelector('.background').style.opacity = 1;
+      setTimeout(() => {
+        document.querySelector('.title').style.opacity = 1;
+      }, 2000);
+      setTimeout(() => {
+        document.querySelector('.menu-buttons').style.opacity = 1;
+        document.getElementById('main-menu').style.opacity = 1;
+      }, 4000);
+    };
+
+    function showSection(id) {
+      const mainMenu = document.getElementById('main-menu');
+      const contentSections = document.getElementById('content-sections');
+      const sectionToShow = document.getElementById(id);
+
+      mainMenu.style.opacity = 0;
+
+      setTimeout(() => {
+        mainMenu.style.display = 'none';
+        contentSections.style.display = 'block';
+
+        document.querySelectorAll('.content-section').forEach(sec => {
+          sec.classList.remove('active', 'slide-out-left');
+        });
+
+        sectionToShow.classList.add('active');
+        sectionToShow.scrollTop = 0;
+        window.scrollTo(0, 0);
+      }, 600);
     }
-  ];
 
-  let currentTrackIndex = 0;
-  let isShuffle = false;
-  let isRepeat = false;
-  let player;
-  const trackTitleEl = document.getElementById('track-title');
-  const trackComposerEl = document.getElementById('track-composer');
-  const playlistListEl = document.getElementById('playlist-list');
+    function returnToMenu() {
+      const mainMenu = document.getElementById('main-menu');
+      const contentSections = document.getElementById('content-sections');
+      const activeSection = document.querySelector('.content-section.active');
 
-  function onYouTubeIframeAPIReady() {
-    player = new YT.Player('yt-player', {
-      height: '0',
-      width: '0',
-      videoId: playlist[0].videoId,
-      events: {
-        'onReady': updateTrackInfo,
-        'onStateChange': onPlayerStateChange
-      }
-    });
-  }
+      if (activeSection) {
+        activeSection.classList.add('slide-out-left');
+        activeSection.classList.remove('active');
 
-  function updateTrackInfo() {
-    const track = playlist[currentTrackIndex];
-    trackTitleEl.textContent = `${track.title} (${track.duration})`;
-    trackComposerEl.textContent = `by ${track.composer}`;
-    highlightActiveTrack();
-  }
+        setTimeout(() => {
+          activeSection.classList.remove('slide-out-left');
+          contentSections.style.display = 'none';
+          mainMenu.style.display = 'block';
 
-  function highlightActiveTrack() {
-    document.querySelectorAll('#playlist-list li').forEach((li, index) => {
-      li.classList.toggle('active', index === currentTrackIndex);
-    });
-  }
-
-  function playTrack(index) {
-    currentTrackIndex = index;
-    const track = playlist[index];
-    player.loadVideoById(track.videoId);
-    updateTrackInfo();
-  }
-
-  function playNextTrack() {
-    if (isShuffle) {
-      currentTrackIndex = Math.floor(Math.random() * playlist.length);
-    } else {
-      currentTrackIndex = (currentTrackIndex + 1) % playlist.length;
-    }
-    playTrack(currentTrackIndex);
-  }
-
-  function playPrevTrack() {
-    currentTrackIndex = (currentTrackIndex - 1 + playlist.length) % playlist.length;
-    playTrack(currentTrackIndex);
-  }
-
-  function toggleRepeat() {
-    isRepeat = !isRepeat;
-    document.getElementById('btn-repeat').style.backgroundColor = isRepeat ? '#0047AB' : 'transparent';
-  }
-
-  function toggleShuffle() {
-    isShuffle = !isShuffle;
-    document.getElementById('btn-shuffle').style.backgroundColor = isShuffle ? '#0047AB' : 'transparent';
-  }
-
-  function togglePlayPause() {
-    if (!player) return;
-    const state = player.getPlayerState();
-    if (state === YT.PlayerState.PLAYING) {
-      player.pauseVideo();
-    } else {
-      player.playVideo();
-    }
-  }
-
-  function onPlayerStateChange(event) {
-    if (event.data === YT.PlayerState.ENDED) {
-      if (isRepeat) {
-        playTrack(currentTrackIndex);
-      } else {
-        playNextTrack();
+          setTimeout(() => {
+            mainMenu.style.opacity = 1;
+          }, 50);
+        }, 600);
       }
     }
-  }
-
-  // Inject hidden iframe
-  const ytIframe = document.createElement('div');
-  ytIframe.id = 'yt-player';
-  ytIframe.style.display = 'none';
-  document.body.appendChild(ytIframe);
-
-  // Event listeners
-  document.getElementById('btn-next').addEventListener('click', playNextTrack);
-  document.getElementById('btn-prev').addEventListener('click', playPrevTrack);
-  document.getElementById('btn-shuffle').addEventListener('click', toggleShuffle);
-  document.getElementById('btn-repeat').addEventListener('click', toggleRepeat);
-  document.getElementById('btn-play-pause').addEventListener('click', togglePlayPause);
-
-  // Populate list
-  playlist.forEach((track, i) => {
-    const li = document.createElement('li');
-    li.textContent = `${track.title} - ${track.composer}`;
-    li.addEventListener('click', () => playTrack(i));
-    playlistListEl.appendChild(li);
-  });
-
-  // Show container when ready
-  window.addEventListener('load', () => {
-    document.getElementById('playlist-container').classList.add('visible');
-  });
-
-</script>
+  </script>
 </body>
 </html>
