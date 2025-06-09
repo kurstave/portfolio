@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Kurstave's Portfolio - Main Menu</title>
+  <title>The Korner - Main Menu</title>
   <link rel="stylesheet" href="assets/css/main.css" />
   <style>
     body {
@@ -34,14 +34,6 @@
 
     #main-menu {
       transition: opacity 1s ease-in-out;
-      position: relative;
-      z-index: 10;
-      pointer-events: auto;
-    }
-
-    #main-menu.hidden {
-      opacity: 0;
-      pointer-events: none;
     }
 
     .menu-buttons {
@@ -96,7 +88,7 @@
       transition: opacity 2s ease-in-out 1s;
     }
 
-    #footer {
+    footer {
       position: absolute;
       bottom: 10px;
       font-size: 0.8em;
@@ -150,7 +142,6 @@
       color: white;
       text-align: center;
       display: none;
-      z-index: 20;
     }
 
     .content-section {
@@ -222,6 +213,10 @@
       background-color: #0047AB;
     }
 
+    a {
+      color: #00FFFF;
+    }
+
     /* Responsive font sizes */
     @media (max-width: 600px) {
       .title {
@@ -249,100 +244,6 @@
       .content-section p {
         font-size: 0.95em;
       }
-    }
-
-    /* Playlist container */
-    #playlist-container {
-      position: fixed;
-      top: 20px;
-      right: -360px; /* start offscreen */
-      width: 350px;
-      background: rgba(20,20,20,0.9);
-      border: 2px solid white;
-      border-radius: 12px;
-      padding: 15px;
-      box-sizing: border-box;
-      color: white;
-      font-family: 'Chaucer', chaucer;
-      font-size: 0.9em;
-      z-index: 10000;
-      transition: right 0.6s ease;
-      display: flex;
-      flex-direction: column;
-      user-select: none;
-      box-shadow: 0 0 15px rgba(0, 0, 255, 0.7);
-      max-height: 90vh;
-      overflow: hidden;
-    }
-    #playlist-container.visible {
-      right: 20px;
-    }
-    #playlist-header {
-      font-weight: bold;
-      font-size: 1.2em;
-      margin-bottom: 10px;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-    }
-    #playlist-controls button {
-      background: transparent;
-      border: 1px solid white;
-      color: white;
-      font-size: 0.9em;
-      padding: 6px 10px;
-      margin-left: 5px;
-      border-radius: 6px;
-      cursor: pointer;
-      transition: background-color 0.3s;
-    }
-    #playlist-controls button:hover {
-      background-color: #0047AB;
-    }
-    #track-info {
-      margin-top: 10px;
-      min-height: 50px;
-    }
-    #track-title {
-      font-weight: bold;
-      font-size: 1.1em;
-    }
-    #track-composer {
-      font-style: italic;
-      font-size: 0.9em;
-      color: #aaa;
-    }
-    #playlist-list {
-      margin-top: 10px;
-      flex-grow: 1;
-      overflow-y: auto;
-      text-align: left;
-      border-top: 1px solid #555;
-      padding-top: 10px;
-    }
-    #playlist-list li {
-      padding: 6px 8px;
-      cursor: pointer;
-      border-radius: 5px;
-      transition: background-color 0.3s;
-    }
-    #playlist-list li:hover {
-      background-color: #0047AB;
-    }
-    #playlist-list li.active {
-      background-color: #0077FF;
-      font-weight: bold;
-    }
-    /* Scrollbar for playlist list */
-    #playlist-list::-webkit-scrollbar {
-      width: 6px;
-    }
-    #playlist-list::-webkit-scrollbar-track {
-      background: transparent;
-    }
-    #playlist-list::-webkit-scrollbar-thumb {
-      background-color: #0047AB;
-      border-radius: 3px;
     }
   </style>
 </head>
@@ -389,7 +290,7 @@
       <button class="back-button" onclick="returnToMenu()">Back to Menu</button>
     </div>
 
-     <div id="socials" class="content-section">
+    <div id="socials" class="content-section">
       <h2>Contact Me!</h2>
       <p>Here are my socials.</p>
       <ul class="icons">
@@ -402,309 +303,72 @@
     </div>
   </div>
 
-  <!-- Playlist Container -->
-  <div id="playlist-container">
-    <div id="playlist-header">
-      <span>Music Playlist</span>
-      <div id="playlist-controls">
-        <button id="btn-play-pause">▶️</button>
-        <button id="btn-next">⏭️</button>
-        <button id="btn-prev">⏮️</button>
-        <button id="btn-shuffle">🔀</button>
-        <button id="btn-repeat">🔁</button>
-      </div>
-    </div>
-    <div id="track-info">
-      <div id="track-title"></div>
-      <div id="track-composer"></div>
-    </div>
-    <ul id="playlist-list"></ul>
-  </div>
+  <!-- <footer>
+    <p>&copy; 2025 Kurstave's Portfolio | <a href="#">My Socials</a></p>
+  </footer> --> 
 
-  <script>
-      let enterClicked = false;
+<script>
+  let enterClicked = false;
+  let fadeTimers = [];
 
-    document.getElementById('enter-button').addEventListener('click', () => {
+
+  document.getElementById('enter-button').addEventListener('click', () => {
     document.getElementById('start-screen').style.display = 'none';
     enterClicked = true;
-    // Wait for DOM ready
-    document.addEventListener('DOMContentLoaded', () => {
-      const startScreen = document.getElementById('start-screen').style.display = 'none';
-      const enterButton = document.getElementById('enter-button').addEventListener('click', () => {;
-                                                                                                  
-      const background = document.querySelector('.background');
-      const mainMenu = document.getElementById('main-menu');
-      const contentSections = document.getElementById('content-sections');
-      const sections = document.querySelectorAll('.content-section');
-      const menuButtons = document.querySelector('.menu-buttons');
-      const title = document.querySelector('.title');
 
-      enterClicked = true;
+    document.querySelector('.background').style.opacity = 1;
 
-      window.showSection = function (id) {
-        // Hide main menu
-        mainMenu.classList.add('hidden');
+    fadeTimers.push(setTimeout(() => {
+      document.querySelector('.title').style.opacity = 1;
+    }, 2000));
 
-        // Show content container
-        contentSections.style.display = 'block';
+    fadeTimers.push(setTimeout(() => {
+      document.querySelector('.menu-buttons').style.opacity = 1;
+    }, 4000));
+  });
 
-        // Activate chosen section
-        sections.forEach(sec => {
-          if (sec.id === id) {
-            sec.classList.add('active');
-            sec.classList.remove('slide-out-left');
-          } else {
-            sec.classList.remove('active');
-          }
-        });
-      };
+  function showSection(id) {
+    const mainMenu = document.getElementById('main-menu');
+    const contentSections = document.getElementById('content-sections');
+    const sectionToShow = document.getElementById(id);
 
-      window.returnToMenu = function () {
-        // Hide all sections
-        sections.forEach(sec => {
-          sec.classList.remove('active');
-          sec.classList.remove('slide-out-left');
-        });
+    mainMenu.style.opacity = 0;
 
-        // Hide content container
-        contentSections.style.display = 'none';
+    setTimeout(() => {
+      mainMenu.style.display = 'none';
+      contentSections.style.display = 'block';
 
-        // Show main menu
-        mainMenu.classList.remove('hidden');
-      };
+      document.querySelectorAll('.content-section').forEach(sec => {
+        sec.classList.remove('active', 'slide-out-left');
+      });
 
-      // ---- Playlist functionality ----
+      sectionToShow.classList.add('active');
+      sectionToShow.scrollTop = 0;
+      window.scrollTo(0, 0);
+    }, 600);
+  }
 
-      const playlist = [
-        {
-          title: "Une vie à t'aimer",
-          composer: "Lorien Testard",
-          url: "https://www.youtube.com/watch?v=3kMbTzomh94"
-        },
-        {
-          title: "Beethoven - Moonlight Sonata",
-          composer: "Ludwig van Beethoven",
-          url: "https://www.youtube.com/watch?v=4Tr0otuiQuU"
-        },
-        {
-          title: "Bach - Air on the G String",
-          composer: "Johann Sebastian Bach",
-          url: "https://www.youtube.com/watch?v=GMkmQlfOJDk"
-        },
-        {
-          title: "Chopin - Nocturne op.9 No.2",
-          composer: "Frédéric Chopin",
-          url: "https://www.youtube.com/watch?v=9E6b3swbnWg"
-        }
-      ];
+  function returnToMenu() {
+    const mainMenu = document.getElementById('main-menu');
+    const contentSections = document.getElementById('content-sections');
+    const activeSection = document.querySelector('.content-section.active');
 
-      const playlistContainer = document.getElementById('playlist-container');
-      const trackTitle = document.getElementById('track-title');
-      const trackComposer = document.getElementById('track-composer');
-      const playlistList = document.getElementById('playlist-list');
-      const btnPlayPause = document.getElementById('btn-play-pause');
-      const btnNext = document.getElementById('btn-next');
-      const btnPrev = document.getElementById('btn-prev');
-      const btnShuffle = document.getElementById('btn-shuffle');
-      const btnRepeat = document.getElementById('btn-repeat');
+    if (activeSection) {
+      activeSection.classList.add('slide-out-left');
+      activeSection.classList.remove('active');
 
-      // Create iframe to embed YouTube player
-      let player;
-      let currentIndex = 0;
-      let isPlaying = false;
-      let isShuffle = false;
-      let isRepeat = false;
-
-      // Load YouTube IFrame Player API
-      let tag = document.createElement('script');
-      tag.src = "https://www.youtube.com/iframe_api";
-      document.body.appendChild(tag);
-
-      // Build playlist list UI
-      function renderPlaylist() {
-        playlistList.innerHTML = '';
-        playlist.forEach((track, i) => {
-          const li = document.createElement('li');
-          li.textContent = track.title + " — " + track.composer;
-          li.dataset.index = i;
-          if (i === currentIndex) {
-            li.classList.add('active');
-          }
-          li.onclick = () => {
-            loadTrack(i);
-            playTrack();
-          };
-          playlistList.appendChild(li);
-        });
-      }
-
-      // When YouTube API is ready
-      window.onYouTubeIframeAPIReady = function() {
-        player = new YT.Player('yt-player', {
-          height: '0',
-          width: '0',
-          videoId: extractVideoID(playlist[currentIndex].url),
-          playerVars: {
-            autoplay: 0,
-            controls: 0,
-            modestbranding: 1,
-            rel: 0,
-            showinfo: 0,
-            iv_load_policy: 3,
-            loop: 0,
-          },
-          events: {
-            'onReady': onPlayerReady,
-            'onStateChange': onPlayerStateChange
-          }
-        });
-      };
-
-      // Extract video ID from YouTube URL
-      function extractVideoID(url) {
-        const regExp = /^.*(?:youtu.be\/|v\/|u\/\w\/|embed\/|watch\?v=|watch\?.+&v=)([^#&?]*).*/;
-        const match = url.match(regExp);
-        return (match && match[1].length === 11) ? match[1] : null;
-      }
-
-      function onPlayerReady(event) {
-        updateTrackInfo();
-      }
-
-      function onPlayerStateChange(event) {
-        if (event.data === YT.PlayerState.ENDED) {
-          nextTrack();
-        }
-      }
-
-      function loadTrack(index) {
-        currentIndex = index;
-        const videoID = extractVideoID(playlist[currentIndex].url);
-        player.loadVideoById(videoID);
-        updateTrackInfo();
-        updatePlaylistHighlight();
-      }
-
-      function playTrack() {
-        player.playVideo();
-        isPlaying = true;
-        btnPlayPause.textContent = '⏸️';
-      }
-
-      function pauseTrack() {
-        player.pauseVideo();
-        isPlaying = false;
-        btnPlayPause.textContent = '▶️';
-      }
-
-      function togglePlayPause() {
-        if (isPlaying) {
-          pauseTrack();
-        } else {
-          playTrack();
-        }
-      }
-
-      function nextTrack() {
-        if (isShuffle) {
-          let nextIndex;
-          do {
-            nextIndex = Math.floor(Math.random() * playlist.length);
-          } while (nextIndex === currentIndex && playlist.length > 1);
-          currentIndex = nextIndex;
-        } else {
-          currentIndex++;
-          if (currentIndex >= playlist.length) {
-            if (isRepeat) {
-              currentIndex = 0;
-            } else {
-              currentIndex = playlist.length - 1;
-              pauseTrack();
-              return;
-            }
-          }
-        }
-        loadTrack(currentIndex);
-        playTrack();
-      }
-
-      function prevTrack() {
-        if (isShuffle) {
-          let prevIndex;
-          do {
-            prevIndex = Math.floor(Math.random() * playlist.length);
-          } while (prevIndex === currentIndex && playlist.length > 1);
-          currentIndex = prevIndex;
-        } else {
-          currentIndex--;
-          if (currentIndex < 0) {
-            if (isRepeat) {
-              currentIndex = playlist.length - 1;
-            } else {
-              currentIndex = 0;
-              pauseTrack();
-              return;
-            }
-          }
-        }
-        loadTrack(currentIndex);
-        playTrack();
-      }
-
-      function updateTrackInfo() {
-        trackTitle.textContent = playlist[currentIndex].title;
-        trackComposer.textContent = playlist[currentIndex].composer;
-      }
-
-      function updatePlaylistHighlight() {
-        const lis = playlistList.querySelectorAll('li');
-        lis.forEach(li => li.classList.remove('active'));
-        const currentLi = playlistList.querySelector(li[data-index="${currentIndex}"]);
-        if (currentLi) currentLi.classList.add('active');
-      }
-
-      function toggleShuffle() {
-        isShuffle = !isShuffle;
-        btnShuffle.style.backgroundColor = isShuffle ? '#0077FF' : 'transparent';
-      }
-
-      function toggleRepeat() {
-        isRepeat = !isRepeat;
-        btnRepeat.style.backgroundColor = isRepeat ? '#0077FF' : 'transparent';
-      }
-
-      // Setup playlist UI and event listeners
-      renderPlaylist();
-
-      btnPlayPause.addEventListener('click', togglePlayPause);
-      btnNext.addEventListener('click', nextTrack);
-      btnPrev.addEventListener('click', prevTrack);
-      btnShuffle.addEventListener('click', toggleShuffle);
-      btnRepeat.addEventListener('click', toggleRepeat);
-
-      // Load first track on ready if YouTube iframe already loaded (in some browsers)
-      // This helps if API script loads after DOMContentLoaded
-      if (window.YT && window.YT.Player) {
-        window.onYouTubeIframeAPIReady();
-      }
-
-      // Inject hidden YouTube iframe player (zero size)
-      const iframeDiv = document.createElement('div');
-      iframeDiv.id = 'yt-player';
-      iframeDiv.style.width = '0';
-      iframeDiv.style.height = '0';
-      iframeDiv.style.position = 'fixed';
-      iframeDiv.style.left = '-9999px';
-      iframeDiv.style.top = '-9999px';
-      document.body.appendChild(iframeDiv);
-
-      // Show playlist container after some delay to prevent overlap with start screen
       setTimeout(() => {
-        playlistContainer.classList.add('visible');
-      }, 5000);
+        activeSection.classList.remove('slide-out-left');
+        contentSections.style.display = 'none';
+        mainMenu.style.display = 'block';
 
-    });
-  </script>
+        setTimeout(() => {
+          mainMenu.style.opacity = 1;
+        }, 50);
+      }, 600);
+    }
+  }
+</script>
 
 </body>
 </html>
