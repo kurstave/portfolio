@@ -94,6 +94,13 @@
       color: white;
       display: none;
     }
+    
+    
+    #now-playing {
+      text-align: left;
+      flex-grow: 1;
+    }
+
 
     .content-section {
       position: absolute;
@@ -264,8 +271,10 @@
     }
 
     function updateNowPlaying() {
-      document.getElementById("now-playing").textContent = playlist[currentTrackIndex].title;
-    }
+      const track = playlist[currentTrackIndex];
+      document.getElementById("now-playing").innerHTML = `<strong>${track.title}</strong><br><span style="font-size: 0.8em; color: #ccc;">by ${track.composer}</span>`;
+}
+
 
     function nextTrack() {
       currentTrackIndex = (currentTrackIndex + 1) % playlist.length;
