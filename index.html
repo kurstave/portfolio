@@ -299,49 +299,10 @@
       border-radius: 6px;
       cursor: pointer;
       transition: background-color 0.3s;
-      <div id="playlist-extra-controls">
-      <input type="range" id="volume-slider" min="0" max="100" value="100" />
-      <input type="range" id="progress-bar" min="0" max="100" value="0" />
-      </div>
     }
     #playlist-controls button:hover {
       background-color: #0047AB;
     }
-      #playlist-extra-controls {
-        margin-top: 10px;
-        display: flex;
-        flex-direction: column;
-        gap: 8px;
-      }
-
-#playlist-extra-controls input[type="range"] {
-  -webkit-appearance: none;
-  width: 100%;
-  height: 6px;
-  background: #444;
-  border-radius: 4px;
-  outline: none;
-  transition: background 0.3s;
-}
-
-#playlist-extra-controls input[type="range"]::-webkit-slider-thumb {
-  -webkit-appearance: none;
-  appearance: none;
-  width: 12px;
-  height: 12px;
-  background: #00f;
-  cursor: pointer;
-  border-radius: 50%;
-}
-
-#playlist-extra-controls input[type="range"]::-moz-range-thumb {
-  width: 12px;
-  height: 12px;
-  background: #00f;
-  cursor: pointer;
-  border-radius: 50%;
-}
-
     #track-info {
       margin-top: 10px;
       min-height: 50px;
@@ -389,9 +350,8 @@
     }
   </style>
 </head>
+<body>
 
-  
-  <body>
   <!-- Start Screen -->
   <div id="start-screen">
     <button id="enter-button">Enter</button>
@@ -476,46 +436,15 @@
       const sections = document.querySelectorAll('.content-section');
       const menuButtons = document.querySelector('.menu-buttons');
       const title = document.querySelector('.title');
-      const volumeSlider = document.getElementById('volume-slider');
-      const progressBar = document.getElementById('progress-bar');
 
-        // Show fade-in on load
-      enterButton.addEventListener('click', () => {
-      startScreen.style.display = 'none';
+      // Show fade-in on load
       background.style.opacity = '1';
       menuButtons.style.opacity = '1';
       title.style.opacity = '1';
-    });
-      
-    volumeSlider.addEventListener('input', () => {
-      const volume = volumeSlider.value / 100;
-      if (player && player.setVolume) {
-        player.setVolume(volume * 100);
-      }
-    });
-  
-    progressBar.addEventListener('input', () => {
-      if (player && player.seekTo) {
-      const duration = player.getDuration();
-      const newTime = duration * (progressBar.value / 100);
-      player.seekTo(newTime, true);
-    }
-  });
 
-// Update progress bar while playing
-setInterval(() => {
-  if (player && typeof player.getCurrentTime === 'function' && typeof player.getDuration === 'function') {
-    const currentTime = player.getCurrentTime();
-    const duration = player.getDuration();
-    if (duration > 0) {
-      const progress = (currentTime / duration) * 100;
-      progressBar.value = progress;
-    }
-  }
-}, 1000);
-
-
-    
+      enterButton.addEventListener('click', () => {
+        startScreen.style.display = 'none';
+      });
 
       window.showSection = function (id) {
         // Hide main menu
@@ -735,7 +664,7 @@ setInterval(() => {
       function updatePlaylistHighlight() {
         const lis = playlistList.querySelectorAll('li');
         lis.forEach(li => li.classList.remove('active'));
-        const currentLi = playlistList.querySelector(`li[data-index="${currentIndex}"]`);
+        const currentLi = playlistList.querySelector(li[data-index="${currentIndex}"]);
         if (currentLi) currentLi.classList.add('active');
       }
 
