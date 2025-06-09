@@ -286,32 +286,31 @@
       border-radius: 3px;
     }
 
-    #player-controls {
-      margin-top: 15px;
-      display: flex;
-      flex-direction: column;
-      gap: 10px;
-    }
+#player-controls {
+  margin-top: 15px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
 
-    #player-controls input[type="range"] {
-      width: 100%;
-      -webkit-appearance: none;
-      height: 6px;
-      border-radius: 5px;
-      background: #555;
-      outline: none;
-      transition: background 0.3s;
-    }
+#player-controls input[type="range"] {
+  width: 100%;
+  -webkit-appearance: none;
+  height: 6px;
+  border-radius: 5px;
+  background: #555;
+  outline: none;
+  transition: background 0.3s;
+}
 
-    #player-controls input[type="range"]::-webkit-slider-thumb {
-      -webkit-appearance: none;
-      appearance: none;
-      width: 14px;
-      height: 14px;
-      border-radius: 50%;
-      background: #00FFFF;
-      cursor: pointer;
-    }
+#player-controls input[type="range"]::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
+  background: #00FFFF;
+  cursor: pointer;
+}
     
   </style>
 </head>
@@ -381,17 +380,16 @@
       <div id="track-title"></div>
       <div id="track-composer"></div>
     </div>
-    <ul id="playlist-list"></ul>
-  </div>
+<!-- ✅ Place this inside playlist-container -->
   <div id="player-controls">
-      <label for="volume-slider">🔊 Volume</label>
-      <input type="range" id="volume-slider" min="0" max="100" value="50" />
+    <label for="volume-slider">🔊 Volume</label>
+    <input type="range" id="volume-slider" min="0" max="100" value="50" />
 
-      <label for="seek-slider">⏱️ Seek</label>
-      <input type="range" id="seek-slider" min="0" max="100" value="0" />
-    </div>
+    <label for="seek-slider">⏱️ Seek</label>
+    <input type="range" id="seek-slider" min="0" max="100" value="0" />
+  </div>
 
-    <ul id="playlist-list"></ul>
+  <ul id="playlist-list"></ul>
   </div>
 
   <script>
