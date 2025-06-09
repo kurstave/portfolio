@@ -494,27 +494,27 @@
     const playlistListEl = document.getElementById('playlist-list');
     const volumeSlider = document.getElementById('volume-slider');
     const seekSlider = document.getElementById('seek-slider');
-  const currentTimeEl = document.getElementById('current-time');
-const totalTimeEl = document.getElementById('total-time');
+    const currentTimeEl = document.getElementById('current-time');
+    const totalTimeEl = document.getElementById('total-time');
 
-function formatTime(seconds) {
-  const mins = Math.floor(seconds / 60);
-  const secs = Math.floor(seconds % 60);
-  return `${mins}:${secs.toString().padStart(2, '0')}`;
-}
-
-// Update seek slider and times
-setInterval(() => {
-  if (player && player.getDuration) {
-    const current = player.getCurrentTime();
-    const duration = player.getDuration();
-    if (duration > 0) {
-      seekSlider.value = (current / duration) * 100;
-      currentTimeEl.textContent = formatTime(current);
-      totalTimeEl.textContent = formatTime(duration);
-    }
+  function formatTime(seconds) {
+    const mins = Math.floor(seconds / 60);
+    const secs = Math.floor(seconds % 60);
+    return `${mins}:${secs.toString().padStart(2, '0')}`;
   }
-}, 1000);
+  
+  // Update seek slider and times
+  setInterval(() => {
+    if (player && player.getDuration) {
+      const current = player.getCurrentTime();
+      const duration = player.getDuration();
+      if (duration > 0) {
+        seekSlider.value = (current / duration) * 100;
+        currentTimeEl.textContent = formatTime(current);
+        totalTimeEl.textContent = formatTime(duration);
+      }
+    }
+  }, 1000);
 
     function onYouTubeIframeAPIReady() {
       player = new YT.Player('yt-player', {
