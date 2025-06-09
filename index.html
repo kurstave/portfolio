@@ -422,10 +422,16 @@
   </div>
 
   <script>
+      let enterClicked = false;
+
+    document.getElementById('enter-button').addEventListener('click', () => {
+    document.getElementById('start-screen').style.display = 'none';
+    enterClicked = true;
     // Wait for DOM ready
     document.addEventListener('DOMContentLoaded', () => {
-      const startScreen = document.getElementById('start-screen');
-      const enterButton = document.getElementById('enter-button');
+      const startScreen = document.getElementById('start-screen').style.display = 'none';
+      const enterButton = document.getElementById('enter-button').addEventListener('click', () => {;
+                                                                                                  
       const background = document.querySelector('.background');
       const mainMenu = document.getElementById('main-menu');
       const contentSections = document.getElementById('content-sections');
@@ -433,14 +439,7 @@
       const menuButtons = document.querySelector('.menu-buttons');
       const title = document.querySelector('.title');
 
-      // Show fade-in on load
-      background.style.opacity = '1';
-      menuButtons.style.opacity = '1';
-      title.style.opacity = '1';
-
-      enterButton.addEventListener('click', () => {
-        startScreen.style.display = 'none';
-      });
+      enterClicked = true;
 
       window.showSection = function (id) {
         // Hide main menu
