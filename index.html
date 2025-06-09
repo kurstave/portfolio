@@ -34,6 +34,12 @@
 
     #main-menu {
       transition: opacity 1s ease-in-out;
+      pointer-events: auto;
+    }
+
+    #main-menu.hidden {
+      opacity: 0;
+      pointer-events: none;
     }
 
     .menu-buttons {
@@ -572,24 +578,25 @@
         if (sec.id === id) {
           sec.classList.add('active');
           sec.classList.remove('slide-out-left');
-        } else if (sec.classList.contains('active')) {
-          sec.classList.remove('active');
-          sec.classList.add('slide-out-left');
-          setTimeout(() => {
+         } else if (sec.classList.contains('active')) {
+            sec.classList.remove('active');
+            sec.classList.add('slide-out-left');
+            setTimeout(() => {
             sec.classList.remove('slide-out-left');
           }, 600);
         }
       });
-      document.getElementById('main-menu').style.opacity = '0';
+      document.getElementById('main-menu').classList.add('hidden');
     }
 
-    function returnToMenu() {
-      const sections = document.querySelectorAll('.content-section');
-      sections.forEach(sec => {
-        sec.classList.remove('active');
-      });
-      document.getElementById('main-menu').style.opacity = '1';
-    }
+function returnToMenu() {
+  const sections = document.querySelectorAll('.content-section');
+  sections.forEach(sec => {
+    sec.classList.remove('active');
+  });
+  document.getElementById('main-menu').classList.remove('hidden');
+}
+
 
   </script>
 
