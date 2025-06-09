@@ -507,13 +507,12 @@ setInterval(() => {
 
 
       // Show fade-in on load
-      background.style.opacity = '1';
-      menuButtons.style.opacity = '1';
-      title.style.opacity = '1';
-
       enterButton.addEventListener('click', () => {
-        startScreen.style.display = 'none';
-      });
+  startScreen.style.display = 'none';
+  background.style.opacity = '1';
+  menuButtons.style.opacity = '1';
+  title.style.opacity = '1';
+});
 
       window.showSection = function (id) {
         // Hide main menu
