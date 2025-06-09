@@ -1,4 +1,3 @@
-<!-- FULL UPDATED HTML FILE -->
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -7,12 +6,37 @@
   <title>Kurstave's Portfolio - Main Menu</title>
   <link rel="stylesheet" href="assets/css/main.css" />
   <style>
-    /* [Your original styles... condensed for space] */
+    body {
+      margin: 0;
+      padding: 0;
+      height: 100vh;
+      font-family: 'Chaucer', chaucer;
+      color: white;
+      text-align: center;
+      overflow: hidden;
+      background-color: black;
+      font-size: 16px;
+    }
 
+    .background {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-image: url('https://wallpapers-clan.com/wp-content/uploads/2024/03/starfall-night-sky-mountains-aesthetic-gif-preview-desktop-wallpaper.gif');
+      background-size: cover;
+      background-position: center;
+      opacity: 0;
+      transition: opacity 3s ease-in-out;
+      z-index: -1;
+    }
+
+    /* Spotify Embed Styling */
     .spotify-widget {
       position: fixed;
       top: 20px;
-      right: -400px;
+      right: -400px; /* hidden initially */
       width: 300px;
       height: 352px;
       z-index: 10;
@@ -23,22 +47,207 @@
       right: 20px;
     }
 
-    /* [Include rest of your styles from original code] */
+    #main-menu {
+      transition: opacity 1s ease-in-out;
+    }
+
+    .menu-buttons {
+      margin-top: 20px;
+      opacity: 0;
+      transition: opacity 1s ease-in-out 1s;
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: 15px;
+    }
+
+    .menu-buttons button {
+      font-size: 1.2em;
+      font-family: 'Chaucer', chaucer;
+      background-color: rgba(0, 0, 0, 0.7);
+      color: white;
+      border: 2px solid white;
+      padding: 12px 24px;
+      margin: 15px;
+      cursor: pointer;
+      border-radius: 5px;
+      transition: background-color 0.3s, transform 0.3s;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-transform: none;
+      letter-spacing: normal;
+      text-align: center;
+      min-width: 150px;
+    }
+
+    .menu-buttons button:hover {
+      background-color: #0047AB;
+      transform: scale(1.1);
+    }
+
+    .menu-buttons button:active {
+      background-color: #0047AB;
+      transform: scale(1);
+    }
+
+    .title {
+      margin-top: 10%;
+      font-size: 2em;
+      text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.8);
+      opacity: 0;
+      transition: opacity 2s ease-in-out 1s;
+    }
+
+    #start-screen {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: #000;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      z-index: 1000;
+    }
+
+    #enter-button {
+      font-size: 1.5em;
+      padding: 15px 30px;
+      background-color: #222;
+      color: white;
+      border: 2px solid white;
+      cursor: pointer;
+      border-radius: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-transform: none;
+      letter-spacing: normal;
+      text-align: center;
+      min-width: 150px;
+    }
+
+    #enter-button:hover {
+      background-color: #0047AB;
+    }
+
+    #content-sections {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      color: white;
+      text-align: center;
+      display: none;
+    }
+
+    .content-section {
+      position: absolute;
+      top: 0;
+      left: 100%;
+      width: 100%;
+      height: 100%;
+      background-color: rgba(0, 0, 0, 0.75);
+      padding: 30px;
+      border-radius: 10px;
+      box-sizing: border-box;
+      opacity: 0;
+      transition: opacity 0.6s ease, left 0.6s ease;
+      overflow-y: auto;
+      pointer-events: none;
+    }
+
+    .content-section.active {
+      left: 0;
+      opacity: 1;
+      pointer-events: auto;
+    }
+
+    .content-section.slide-out-left {
+      left: -100%;
+      opacity: 0;
+    }
+
+    .content-section h2 {
+      font-size: 1.8em;
+    }
+
+    .content-section p {
+      font-size: 1em;
+    }
+
+    .content-section .back-button {
+      margin-left: auto;
+      margin-right: auto;
+      display: flex;
+      justify-content: center;
+    }
+
+    .back-button {
+      margin-top: 30px;
+      font-size: 1em;
+      font-family: 'Chaucer', chaucer;
+      padding: 12px 24px;
+      background-color: #444;
+      border: 2px solid white;
+      color: white;
+      border-radius: 8px;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      min-width: 150px;
+    }
+
+    .back-button:hover {
+      background-color: #0047AB;
+    }
+
+    a {
+      color: #00FFFF;
+    }
+
+    @media (max-width: 600px) {
+      .title {
+        font-size: 1.5em;
+      }
+
+      .menu-buttons button,
+      .back-button,
+      #enter-button {
+        padding: 12px 24px;
+        min-width: 150px;
+      }
+
+      .content-section h2 {
+        font-size: 1.5em;
+      }
+
+      .content-section p {
+        font-size: 0.95em;
+      }
+    }
   </style>
 </head>
 <body>
 
+  <!-- Start Screen -->
   <div id="start-screen">
     <button id="enter-button">Enter</button>
   </div>
 
+  <!-- Background -->
   <div class="background"></div>
 
-  <!-- Spotify Playlist -->
+  <!-- Spotify Embed -->
   <div class="spotify-widget" id="spotify-widget">
     <iframe style="border-radius:12px" src="https://open.spotify.com/embed/playlist/1oaZBW0KQqZwUvBe7J4V9R?utm_source=generator" width="100%" height="100%" frameBorder="0" allowfullscreen="" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>
   </div>
 
+  <!-- Main Menu -->
   <div id="main-menu">
     <div class="title">
       <h1>Kurstave's Portfolio</h1>
@@ -51,14 +260,37 @@
     </div>
   </div>
 
+  <!-- Content Sections -->
   <div id="content-sections">
-    <!-- Sections Here -->
     <div id="projects" class="content-section">
       <h2>Current Projects</h2>
       <p>Details about your latest projects go here.</p>
       <button class="back-button" onclick="returnToMenu()">Back to Menu</button>
     </div>
-    <!-- Add the other sections here like About, Resume, Socials -->
+
+    <div id="about" class="content-section">
+      <h2>About Me</h2>
+      <p>Some information about who you are.</p>
+      <button class="back-button" onclick="returnToMenu()">Back to Menu</button>
+    </div>
+
+    <div id="resume" class="content-section">
+      <h2>Resume</h2>
+      <p>Your resume content or a link to download it.</p>
+      <button class="back-button" onclick="returnToMenu()">Back to Menu</button>
+    </div>
+
+    <div id="socials" class="content-section">
+      <h2>Contact Me!</h2>
+      <p>Here are my socials.</p>
+      <ul class="icons">
+        <li><a href="https://github.com/kurstave">GitHub</a></li>
+        <li><a href="#">Instagram</a></li>
+        <li><a href="#">Bandcamp</a></li>
+        <li><a href="#">LinkedIn</a></li>
+      </ul>
+      <button class="back-button" onclick="returnToMenu()">Back to Menu</button>
+    </div>
   </div>
 
 <script>
@@ -69,12 +301,13 @@
     document.getElementById('start-screen').style.display = 'none';
     enterClicked = true;
 
-    // Show background
+    // Reveal background
     document.querySelector('.background').style.opacity = 1;
 
     // Slide in Spotify widget
     document.getElementById('spotify-widget').classList.add('visible');
 
+    // Fade in title and menu
     fadeTimers.push(setTimeout(() => {
       document.querySelector('.title').style.opacity = 1;
     }, 2000));
@@ -88,13 +321,10 @@
 
   function skipFadeIn() {
     if (!enterClicked) return;
-
     fadeTimers.forEach(timer => clearTimeout(timer));
-
     document.querySelector('.background').style.opacity = 1;
     document.querySelector('.title').style.opacity = 1;
     document.querySelector('.menu-buttons').style.opacity = 1;
-
     document.removeEventListener('click', skipFadeIn);
   }
 
