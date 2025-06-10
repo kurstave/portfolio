@@ -38,15 +38,6 @@
       opacity: 0;
     }
 
-    .menu-buttons {
-      margin-top: 20px;
-      opacity: 0;
-      transition: opacity 1s ease-in-out 1s;
-      display: flex;
-      justify-content: center;
-      flex-wrap: wrap;
-      gap: 15px;
-    }
 
     .menu-buttons button {
       font-size: 1.2em;
@@ -80,8 +71,26 @@
       font-size: 2em;
       text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.8);
       opacity: 0;
-      transition: opacity 2s ease-in-out 1s;
+      transform: translateX(100%);
+      transition: transform 1s ease-out, opacity 1s ease-out;
     }
+
+    .menu-buttons {
+      margin-top: 20px;
+      opacity: 0;
+      transform: translateX(100%);
+      transition: transform 1s ease-out 0.3s, opacity 1s ease-out 0.3s;
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: 15px;
+    }
+
+.title.animate-in,
+.menu-buttons.animate-in {
+  transform: translateX(0);
+  opacity: 1;
+}
 
     #footer {
       position: absolute;
@@ -421,16 +430,18 @@
   </div>
 
   <script>
-    window.onload = () => {
-      document.querySelector('.background').style.opacity = 1;
-      setTimeout(() => {
-        document.querySelector('.title').style.opacity = 1;
-      }, 2000);
-      setTimeout(() => {
-        document.querySelector('.menu-buttons').style.opacity = 1;
-        document.getElementById('main-menu').style.opacity = 1;
-      }, 4000);
-    };
+   window.onload = () => {
+  document.querySelector('.background').style.opacity = 1;
+
+  setTimeout(() => {
+    document.querySelector('.title').classList.add('animate-in');
+  }, 1000);
+
+  setTimeout(() => {
+    document.querySelector('.menu-buttons').classList.add('animate-in');
+    document.getElementById('main-menu').style.opacity = 1;
+  }, 1500);
+};
 
     function showSection(id) {
       const mainMenu = document.getElementById('main-menu');
