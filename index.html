@@ -2,134 +2,334 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>The Korner - Main Menu</title>
-  <!-- Link your CSS here -->
-  <!-- <link rel="stylesheet" href="styles.css" /> -->
   <style>
-    /* Reset & base */
-    * { box-sizing: border-box; margin: 0; padding: 0; }
-    body, html { width: 100%; height: 100%; font-family: sans-serif; }
-    .hidden { display: none; }
+    body {
+      margin: 0;
+      padding: 0;
+      height: 100vh;
+      font-family: 'Chaucer', chaucer;
+      color: white;
+      text-align: center;
+      overflow: hidden;
+      background-color: black;
+      font-size: 16px;
+      -webkit-text-size-adjust: 100%;
+      text-size-adjust: 100%;
+    }
 
-    /* Main menu */
-    #menu {
+    .background {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-image: url('https://wallpapers-clan.com/wp-content/uploads/2024/03/starfall-night-sky-mountains-aesthetic-gif-preview-desktop-wallpaper.gif');
+      background-size: cover;
+      background-position: center;
+      opacity: 0;
+      transition: opacity 3s ease-in-out;
+      z-index: -1;
+    }
+
+    #main-menu {
+      transition: opacity 1s ease-in-out;
+      display: block;
+      opacity: 0;
+    }
+
+
+    .menu-buttons button {
+      font-size: 1.2em;
+      font-family: 'Chaucer', chaucer;
+      background-color: rgba(0, 0, 0, 0.7);
+      color: white;
+      border: 2px solid white;
+      padding: 12px 24px;
+      margin: 15px;
+      cursor: pointer;
+      border-radius: 5px;
+      transition: background-color 0.3s, transform 0.3s;
+      display: inline-block;
+      text-transform: none; 
+      line-height: 0.5;      
+      text-align: center; 
+    }
+
+    .menu-buttons button:hover {
+      background-color: #0047AB;
+      transform: scale(1.1);
+    }
+
+    .menu-buttons button:active {
+      background-color: #0047AB;
+      transform: scale(1);
+    }
+
+    .title {
+      margin-top: 10%;
+      font-size: 2em;
+      text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.8);
+      opacity: 0;
+      transform: translateX(100%);
+      transition: transform 1s ease-out, opacity 1s ease-out;
+    }
+
+    .menu-buttons {
+      margin-top: 20px;
+      opacity: 0;
+      transform: translateX(100%);
+      transition: transform 1s ease-out 0.3s, opacity 1s ease-out 0.3s;
       display: flex;
       flex-direction: column;
       align-items: center;
-      justify-content: center;
-      height: 100%;
-      background: #282c34;
-      color: #fafafa;
-      text-align: center;
-    }
-    #menu h1 {
-      font-size: 3rem;
-      margin-bottom: 1.5rem;
-    }
-    #menu button {
-      margin: 0.5rem 0;
-      padding: 0.75rem 1.5rem;
-      font-size: 1.1rem;
-      color: #282c34;
-      background: #61dafb;
-      border: none;
-      border-radius: 4px;
-      cursor: pointer;
-      transition: background 0.2s;
-    }
-    #menu button:hover {
-      background: #21a1f1;
+      gap: 15px;
+      line-height: 1.0;      
+      text-align: center; 
     }
 
-    /* Content sections */
-    .section {
-      padding: 2rem;
-      min-height: 100%;
-      background: #f5f5f5;
+.title.animate-in,
+.menu-buttons.animate-in {
+  transform: translateX(0);
+  opacity: 1;
+}
+
+    #footer {
+      position: absolute;
+      bottom: 10px;
+      font-size: 0.8em;
+      color: rgba(255, 255, 255, 0.7);
     }
-    .section h2 {
-      margin-bottom: 1rem;
-      color: #282c34;
+
+    #content-sections {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      color: white;
+      text-align: center;
+      display: none;
     }
-    .back-btn {
+
+    .content-section {
+      position: absolute;
+      top: 0;
+      left: 100%;
+      width: 100%;
+      height: 100%;
+      background-color: rgba(0, 0, 0, 0.75);
+      padding: 30px;
+      border-radius: 10px;
+      box-sizing: border-box;
+      opacity: 0;
+      transition: opacity 0.6s ease, left 0.6s ease;
+      overflow-y: auto;
+      pointer-events: none;
+    }
+
+    .content-section.active {
+      left: 0;
+      opacity: 1;
+      pointer-events: auto;
+    }
+
+    .content-section.slide-out-left {
+      left: -100%;
+      opacity: 0;
+    }
+
+    .content-section h2 {
+      font-size: 1.8em;
+    }
+
+    .content-section p {
+      font-size: 1em;
+    }
+
+    .content-section .back-button {
+      margin-left: auto;
+      margin-right: auto;
+      display: flex;
+      justify-content: center;
+    }
+
+    .back-button {
+      margin-top: 30px;
+      font-size: 1em;
+      font-family: 'Chaucer', chaucer;
+      padding: 12px 24px;
+      background-color: #444;
+      border: 2px solid white;
+      color: white;
+      border-radius: 8px;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      min-width: 150px;
       display: inline-block;
-      margin-top: 1.5rem;
-      padding: 0.5rem 1rem;
-      color: #fafafa;
-      background: #282c34;
-      text-decoration: none;
-      border-radius: 4px;
-      transition: opacity 0.2s;
+      text-transform: none; 
+      line-height: 0.5;      
+      text-align: center; 
     }
-    .back-btn:hover {
-      opacity: 0.8;
+
+    .back-button:hover {
+      background-color: #0047AB;
     }
+
+    a {
+      color: #00FFFF;
+    }
+
+    @media (max-width: 600px) {
+      .title {
+        font-size: 1.5em;
+      }
+
+      .menu-buttons button,
+      .back-button {
+        padding: 12px 24px;
+        min-width: 150px;
+      }
+
+      .content-section h2 {
+        font-size: 1.5em;
+      }
+
+      .content-section p {
+        font-size: 0.95em;
+      }
+    }
+
+   
   </style>
 </head>
 <body>
-  <header>
-    <nav>
-      <ul>
-        <li><a href="#projects">Current Projects</a></li>
-        <li><a href="#about">About Me</a></li>
-        <li><a href="#interests">Music</a></li>
-        <li><a href="#contact">Contact Me</a></li>
-      </ul>
-    </nav>
-  </header>
 
-  <main>
-    <section id="projects">
+  <!-- Background -->
+  <div class="background"></div>
+
+  <!-- Main Menu -->
+  <div id="main-menu">
+    <div class="title">
+      <h1>The Korner</h1>
+    </div>
+    <div class="menu-buttons">
+      <button onclick="showSection('projects')">Current Projects</button>
+      <button onclick="showSection('about')">About Me</button>
+      <button onclick="showSection('about')">Music</button>
+      <button onclick="showSection('socials')">Contact Me!</button>
+    </div>
+  </div>
+
+  <!-- Content Sections -->
+  <div id="content-sections">
+    <div id="projects" class="content-section">
       <h2>Current Projects</h2>
-      <p>I'm currently working on this website!</p>
-      <a href="#" class="back-btn" data-back>← Back to Menu</a>
-    </section>
+      <img src = "assets/images/{C5CD63B0-9575-4D81-BE26-8B70291F97F7}.png" alt = "Website Front End Image" style="width:400px;height:200px;">
+      <p>- This Website</p>
+      <button class="back-button" onclick="returnToMenu()">Back to Menu</button>
+    </div>
 
-    <section id="about">
+    <div id="about" class="content-section">
       <h2>About Me</h2>
-      <p>Hi!</p>
-      <a href="#" class="back-btn" data-back>← Back to Menu</a>
-    </section>
+      <p>Just someone trying to code a website.</p>
+      <button class="back-button" onclick="returnToMenu()">Back to Menu</button>
+    </div>
 
-    <section id="interests">
+    <div id="about" class="content-section">
       <h2>Music</h2>
-      <p>Albums I'm Interested in Right Now:</p>
+      <p>Albums I'm Currently Interested In:</p>
       <p>"Tennis, Everyone?" — A Tribute to the Late, Great James O. Incandenza - Hakita</p>
       <p>Nor Fork 40,000 - Nor Fork</p>
       <p>Casiopea - Casiopea</p>
-      <a href="#" class="back-btn" data-back>← Back to Menu</a>
-    </section>
+      <button class="back-button" onclick="returnToMenu()">Back to Menu</button>
+    </div>
 
-    <section id="contact">
-      <h2>Contact Me</h2>
-      <p>Provide a contact form, email link, or social media profiles.</p>
-      <a href="#" class="back-btn" data-back>← Back to Menu</a>
-    </section>
-  </main>
+    <div id="socials" class="content-section">
+      <h2>Contact Me!</h2>
+      <p>Here are my socials.</p>
+      <ul class="icons">
+        <p><a href="https://github.com/kurstave" target="_blank" rel="noopener noreferrer">GitHub</span></a></p>
+        <p><a href="#"><span class="label" target="_blank" rel="noopener noreferrer">Instagram</span></a></p>
+        <p><a href="#"><span class="label" target="_blank" rel="noopener noreferrer">Bandcamp</span></a></p>
+      </ul>
+      <button class="back-button" onclick="returnToMenu()">Back to Menu</button>
+    </div>
+  </div>
 
-  <footer>
-    <p>©Copyright footer for some reason!</p>
-  </footer>
+  
 
-   <script>
-    const menu = document.getElementById('menu');
-    const sections = document.querySelectorAll('.section');
-    document.querySelectorAll('#menu button').forEach(btn => {
-      btn.addEventListener('click', () => {
-        const target = document.getElementById(btn.dataset.target);
-        menu.classList.add('hidden');
-        sections.forEach(sec => sec.classList.add('hidden'));
-        target.classList.remove('hidden');
-      });
-    });
-    document.querySelectorAll('[data-back]').forEach(link => {
-      link.addEventListener('click', e => {
-        e.preventDefault();
-        sections.forEach(sec => sec.classList.add('hidden'));
-        menu.classList.remove('hidden');
-      });
-    });
+  <script>
+   window.onload = () => {
+  document.querySelector('.background').style.opacity = 1;
+
+  setTimeout(() => {
+    document.querySelector('.title').classList.add('animate-in');
+  }, 1000);
+
+  setTimeout(() => {
+    document.querySelector('.menu-buttons').classList.add('animate-in');
+    document.getElementById('main-menu').style.opacity = 1;
+  }, 1500);
+};
+
+    function showSection(id) {
+      const mainMenu = document.getElementById('main-menu');
+      const contentSections = document.getElementById('content-sections');
+      const sectionToShow = document.getElementById(id);
+
+      mainMenu.style.opacity = 0;
+
+      setTimeout(() => {
+        mainMenu.style.display = 'none';
+        contentSections.style.display = 'block';
+
+        document.querySelectorAll('.content-section').forEach(sec => {
+          sec.classList.remove('active', 'slide-out-left');
+        });
+
+        sectionToShow.classList.add('active');
+        sectionToShow.scrollTop = 0;
+        window.scrollTo(0, 0);
+      }, 600);
+    }
+
+    function returnToMenu() {
+      const mainMenu = document.getElementById('main-menu');
+      const contentSections = document.getElementById('content-sections');
+      const activeSection = document.querySelector('.content-section.active');
+
+      if (activeSection) {
+        activeSection.classList.add('slide-out-left');
+        activeSection.classList.remove('active');
+
+        setTimeout(() => {
+          activeSection.classList.remove('slide-out-left');
+          contentSections.style.display = 'none';
+          mainMenu.style.display = 'block';
+
+          setTimeout(() => {
+            mainMenu.style.opacity = 1;
+          }, 50);
+        }, 600);
+      }
+    }
   </script>
+
+    <script>
+    window.addEventListener('load', () => {
+      document.querySelector('.background').style.opacity = 1;
+      setTimeout(() => {
+        document.querySelector('.title').style.opacity = 1;
+      }, 2000);
+      setTimeout(() => {
+        document.querySelector('.menu-buttons').style.opacity = 1;
+        document.getElementById('main-menu').style.opacity = 1;
+      }, 4000);
+    });
+</script>
 </body>
 </html>
