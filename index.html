@@ -6,6 +6,66 @@
   <title>The Korner - Main Menu</title>
   <!-- Link your CSS here -->
   <!-- <link rel="stylesheet" href="styles.css" /> -->
+  <style>
+    /* Reset & base */
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body, html { width: 100%; height: 100%; font-family: sans-serif; }
+    .hidden { display: none; }
+
+    /* Main menu */
+    #menu {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      height: 100%;
+      background: #282c34;
+      color: #fafafa;
+      text-align: center;
+    }
+    #menu h1 {
+      font-size: 3rem;
+      margin-bottom: 1.5rem;
+    }
+    #menu button {
+      margin: 0.5rem 0;
+      padding: 0.75rem 1.5rem;
+      font-size: 1.1rem;
+      color: #282c34;
+      background: #61dafb;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+      transition: background 0.2s;
+    }
+    #menu button:hover {
+      background: #21a1f1;
+    }
+
+    /* Content sections */
+    .section {
+      padding: 2rem;
+      min-height: 100%;
+      background: #f5f5f5;
+    }
+    .section h2 {
+      margin-bottom: 1rem;
+      color: #282c34;
+    }
+    .back-btn {
+      display: inline-block;
+      margin-top: 1.5rem;
+      padding: 0.5rem 1rem;
+      color: #fafafa;
+      background: #282c34;
+      text-decoration: none;
+      border-radius: 4px;
+      transition: opacity 0.2s;
+    }
+    .back-btn:hover {
+      opacity: 0.8;
+    }
+  </style>
 </head>
 <body>
   <header>
@@ -23,11 +83,13 @@
     <section id="projects">
       <h2>Current Projects</h2>
       <p>I'm currently working on this website!</p>
+      <a href="#" class="back-btn" data-back>← Back to Menu</a>
     </section>
 
     <section id="about">
       <h2>About Me</h2>
       <p>Hi!</p>
+      <a href="#" class="back-btn" data-back>← Back to Menu</a>
     </section>
 
     <section id="interests">
@@ -36,16 +98,38 @@
       <p>"Tennis, Everyone?" — A Tribute to the Late, Great James O. Incandenza - Hakita</p>
       <p>Nor Fork 40,000 - Nor Fork</p>
       <p>Casiopea - Casiopea</p>
+      <a href="#" class="back-btn" data-back>← Back to Menu</a>
     </section>
 
     <section id="contact">
       <h2>Contact Me</h2>
       <p>Provide a contact form, email link, or social media profiles.</p>
+      <a href="#" class="back-btn" data-back>← Back to Menu</a>
     </section>
   </main>
 
   <footer>
     <p>©Copyright footer for some reason!</p>
   </footer>
+
+   <script>
+    const menu = document.getElementById('menu');
+    const sections = document.querySelectorAll('.section');
+    document.querySelectorAll('#menu button').forEach(btn => {
+      btn.addEventListener('click', () => {
+        const target = document.getElementById(btn.dataset.target);
+        menu.classList.add('hidden');
+        sections.forEach(sec => sec.classList.add('hidden'));
+        target.classList.remove('hidden');
+      });
+    });
+    document.querySelectorAll('[data-back]').forEach(link => {
+      link.addEventListener('click', e => {
+        e.preventDefault();
+        sections.forEach(sec => sec.classList.add('hidden'));
+        menu.classList.remove('hidden');
+      });
+    });
+  </script>
 </body>
 </html>
