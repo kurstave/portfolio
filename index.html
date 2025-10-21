@@ -202,8 +202,17 @@
       .content-section p {
         font-size: 0.95em;
       }
+      .icons {
+        list-style: none;            /* remove bullets */
+        padding: 0;                  /* remove default indent */
+        margin: 20px auto;           /* auto-center the UL block, with vertical spacing */
+        display: flex;               /* enable flex layout */
+        flex-direction: column;      /* stack items vertically */
+        align-items: center;         /* center items horizontally */
+        gap: 10px;                   /* space between links */
+      }
     }
-
+      
    
   </style>
 </head>
@@ -254,9 +263,9 @@
       <h2>Contact Me!</h2>
       <p>Here are my socials.</p>
       <ul class="icons">
-        <p><a href="https://github.com/kurstave" target="_blank" rel="noopener noreferrer">GitHub</span></a></p>
-        <p><a href="#" target="_blank" rel="noopener noreferrer">Instagram</span></a></p>
-        <p><a href="https://bandcamp.com/kurey" target="_blank" rel="noopener noreferrer">Bandcamp</span></a></p>
+        <li><a href="https://github.com/kurstave" target="_blank" rel="noopener noreferrer">GitHub</span></a></li>
+        <li><a href="#" target="_blank" rel="noopener noreferrer">Instagram</span></a></li>
+        <li><a href="https://bandcamp.com/kurey" target="_blank" rel="noopener noreferrer">Bandcamp</span></a></li>
       </ul>
       <button class="back-button" onclick="returnToMenu()">Back to Menu</button>
     </div>
